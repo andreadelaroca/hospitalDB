@@ -175,3 +175,15 @@ GO
 ALTER TABLE Hospital.Habitaciones
 	DROP COLUMN edificio
 GO
+
+--45. Crear y eliminar una tabla Auditoria
+CREATE TABLE Auditoria (
+	idAuditoria INT IDENTITY(1,1) PRIMARY KEY
+	, operacion NVARCHAR(30) NOT NULL
+)
+GO
+
+DROP TABLE Auditoria
+GO
+
+--
