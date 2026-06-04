@@ -399,7 +399,10 @@ UPDATE Hospital.Habitaciones SET disponibilidad = 1 WHERE idHabitacion = 1
 GO
 
 --74. Actualizar tratamiento activo.
-UPDATE Hospital.Tratamientos SET estado = '' WHERE idTratamiento = 6
+UPDATE Hospital.Tratamientos SET estado = 'Activo' WHERE idTratamiento = 6
 GO
 
---75. 
+--75. Actualizar medicamento.
+UPDATE Hospital.Medicamentos SET estado = 'Vigente' WHERE idMedicamento = 10
+GO
+
