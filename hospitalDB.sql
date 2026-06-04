@@ -157,3 +157,5 @@ ALTER TABLE Hospital.Habitaciones
 GO
 
 --41. Eliminar una tabla temporal
+DROP TABLE IF EXISTS tempdb.sys.tables
+GO
