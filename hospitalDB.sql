@@ -438,3 +438,7 @@ GO
 --83. Eliminar un medicamento
 DELETE FROM Hospital.Medicamentos WHERE idMedicamento = 20
 GO
+
+--84. Eliminar una habitación
+DELETE FROM Hospital.Habitaciones WHERE idHabitacion = 10
+GO
