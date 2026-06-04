@@ -83,7 +83,11 @@ CREATE TABLE Gestiones.Citas (
 GO
 
 --8. Creación de tabla Habitaciones
-CREATE TABLE Hospital.Habitaciones
+CREATE TABLE Hospital.Habitaciones (
+	idHabitacion INT IDENTITY(1,1) CONSTRAINT PK_idHabitacion PRIMARY KEY
+	, codigo VARCHAR(20) NOT NULL
+	, idPaciente INT NULL CONSTRAINT FK_idPaciente FOREIGN KEY REFERENCES Gestiones.Pacientes(idPaciente)
+)
 GO
 
 --9. Creación de tabla Tratamientos
