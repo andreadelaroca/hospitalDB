@@ -226,3 +226,23 @@ GO
 
 DROP TABLE Hospital.MedicamentosPrueba
 GO
+
+--50. Eliminar una base de datos de pruebas
+USE master
+GO
+
+IF EXISTS(SELECT * FROM sys.databases WHERE NAME = 'Prueba')
+	BEGIN
+		ALTER DATABASE Prueba SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+		DROP DATABASE Prueba
+	END
+GO
+
+CREATE DATABASE Prueba
+GO
+
+DROP DATABASE Prueba
+GO
+
+USE HospitalDB
+GO
