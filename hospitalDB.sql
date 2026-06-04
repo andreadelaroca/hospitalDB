@@ -135,3 +135,12 @@ ALTER TABLE Empleados.Medicos
 	, turno VARCHAR(10) CONSTRAINT CK_turno_val CHECK(turno IN ('Matutino', 'Diurno', 'Nocturno'))
 GO
 
+--35. Agregar columna observaciones
+ALTER TABLE Gestiones.Citas
+	ADD observaciones NVARCHAR(120) NOT NULL
+GO
+
+--36. Eliminar columna observaciones
+ALTER TABLE Gestiones.Citas
+	DROP COLUMN observaciones
+GO
