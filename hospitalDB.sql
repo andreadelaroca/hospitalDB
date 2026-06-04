@@ -74,6 +74,8 @@ CREATE TABLE Gestiones.Citas (
 	idCita INT IDENTITY(1,1) CONSTRAINT PK_idCita PRIMARY KEY
 	, fecha DATETIME NOT NULL
 	, estado VARCHAR(20) CONSTRAINT CK_estado_val CHECK(estado IN ('Agendada', 'Confirmada', 'En proceso', 'Completada', 'Cancelada', 'Inasistencia', 'Reprogramada'))
+	, idPaciente INT CONSTRAINT FK_idPaciente REFERENCES Gestiones.Pacientes(idPaciente) --21. FOREIGN KEY entre Citas y Pacientes
+	, idMedico INT CONSTRAINT FK_idMedico REFERENCES Empleados.Medicos(idMedico) --22. FOREIGN KEY entre Citas y Médicos
 	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
 	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
 	, fechaEliminado DATETIME NULL
