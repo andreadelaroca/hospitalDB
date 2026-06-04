@@ -414,3 +414,6 @@ GO
 UPDATE Empleados.Medicos SET correo = 'b@gmail.com' WHERE idMedico = 1
 GO
 
+--78. Actualizar fecha de cita.
+UPDATE Gestiones.Citas SET fecha = '2026-04-08' WHERE idCita = 1
+GO
