@@ -389,3 +389,9 @@ GO
 --71. Actualizar costo de consulta
 UPDATE Gestiones.Citas SET costo = 10.75 WHERE idCita = 1
 GO
+
+--72. Actualizar nombre de especialidad
+UPDATE Empleados.Especialidades SET nombre = 'Gastroentología' WHERE idEspecialidad = 1
+GO
+
+--73
