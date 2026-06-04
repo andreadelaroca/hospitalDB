@@ -374,3 +374,6 @@ GO
 UPDATE Gestiones.Pacientes SET direccion = 'Vistas de Esquipulas' WHERE idPaciente = 1
 GO
 
+--68. Actualizar salario de un médico.
+UPDATE Empleados.Medicos SET salario = 2222.5 WHERE idMedico = 1
+GO
