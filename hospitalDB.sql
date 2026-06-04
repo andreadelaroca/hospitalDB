@@ -165,4 +165,8 @@ ALTER TABLE Gestiones.Pacientes
 	DROP CONSTRAINT CK_tipo_sangre_val
 GO
 
---
+--43. Eliminar una restricción UNIQUE
+ALTER TABLE Gestiones.Medicos
+	DROP CONSTRAINT UQ_correo_med
+GO
+
