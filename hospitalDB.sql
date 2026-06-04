@@ -319,3 +319,18 @@ INSERT INTO Hospital.Habitaciones (codigo, idPaciente, disponibilidad) VALUES
 	('HAB-204', NULL, 1), -- Disponible
 	('HAB-205', NULL, 1); -- Disponible
 GO
+
+--56. Insertar 10 tratamientos
+INSERT INTO Hospital.Tratamientos (descripcion, estado, idPaciente) VALUES
+	('Tratamiento de hipertensión arterial crónica', 'Activo', 1),
+	('Quimioterapia preventiva etapa inicial', 'Activo', 2),
+	('Fisioterapia por fractura de fémur', 'Activo', 3),
+	('Antibióticos endovenosos por infección', 'Activo', 4),
+	('Control metabólico de diabetes tipo 2', 'Activo', 5),
+	('Rehabilitación post-infarto agudo', 'Finalizado', 6),
+	('Tratamiento dermatológico para dermatitis', 'Finalizado', 7),
+	('Manejo del dolor por migraña crónica', 'Finalizado', 8),
+	('Corrección de postura y columna', 'Finalizado', 9),
+	('Tratamiento antiviral por hepatitis', 'Finalizado', 10)
+GO
+
