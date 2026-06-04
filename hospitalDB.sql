@@ -255,3 +255,18 @@ INSERT INTO Empleados.Especialidades (nombre) VALUES
 	('Dermatología'),
 	('Traumatología')
 GO
+
+
+--52. Insertar 10 médicos
+INSERT INTO Empleados.Medicos (nombres, apellidos, correo, edad, salario, idEspecialidad, experiencia, turno) VALUES
+	('Carlos', 'Pérez', 'carlos.perez@hospital.com', 45, 850.50, 1, '15 años en cardiología clínica', 'Matutino'),
+	('Ana', 'Gómez', 'ana.gomez@hospital.com', 38, 720.00, 2, '10 años en pediatría neonatal', 'Diurno'),
+	('Luis', 'Martínez', 'luis.martinez@hospital.com', 50, 950.00, 3, '20 años en neurocirugía', 'Nocturno'),
+	('María', 'Rodríguez', 'maria.rodriguez@hospital.com', 41, 680.75, 4, '8 años en dermatología estética', 'Matutino'),
+	('Jorge', 'López', 'jorge.lopez@hospital.com', 47, 890.00, 5, '12 años en traumatología deportiva', 'Diurno'),
+	('Sofía', 'Sánchez', 'sofia.sanchez@hospital.com', 35, 710.25, 1, '5 años en insuficiencia cardíaca', 'Nocturno'),
+	('Pedro', 'Ramírez', 'pedro.ramirez@hospital.com', 52, 980.00, 2, '22 años en pediatría integral', 'Matutino'),
+	('Elena', 'Torres', 'elena.torres@hospital.com', 39, 790.50, 3, '9 años en enfermedades neuromusculares', 'Diurno'),
+	('David', 'Flores', 'david.flores@hospital.com', 43, 650.00, 4, '11 años en cáncer de piel', 'Nocturno'),
+	('Laura', 'Castro', 'laura.castro@hospital.com', 46, 875.30, 5, '14 años en cirugía de reemplazo articular', 'Matutino');
+GO
