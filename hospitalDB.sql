@@ -36,7 +36,10 @@ CREATE TABLE Gestiones.Pacientes (
 	idPaciente INT IDENTITY(1,1) CONSTRAINT PK_idPaciente PRIMARY KEY --11. PK Pacientes
 	, nombre NVARCHAR(60) NOT NULL --13. nombre NOT NULL 
 	, correo NVARCHAR(100) CONSTRAINT UQ_correo_pac UNIQUE --15. correo UNIQUE
-	, fechanac DATE CONSTRAINT CK_edad_val_pac CHECK(fechanac >= GETDATE()) --17. CHECK para edad mayor o igual a 0.
+	, fechaNac DATE CONSTRAINT CK_edad_val_pac CHECK(fechanac >= GETDATE()) --17. CHECK para edad mayor o igual a 0.
+	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE()
+	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
+	, fechaEliminado DATETIME NULL
 )
 GO
 
@@ -46,6 +49,10 @@ CREATE TABLE Empleados.Medicos (
 	, nombre NVARCHAR(60) NOT NULL --14. nombre NOT NULL 
 	, correo NVARCHAR(100) CONSTRAINT UQ_correo_med UNIQUE --16. correo UNIQUE
 	, fechanac DATE CONSTRAINT CK_edad_val_med CHECK(fechanac >= GETDATE()) --17. CHECK para edad mayor o igual a 0.
+	, salario DECIMAL(5,2) CONSTRAINT CK_salario_val CHECK(salario > 0)
+	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE()
+	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
+	, fechaEliminado DATETIME NULL
 )
 GO
 
