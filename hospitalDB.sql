@@ -385,3 +385,7 @@ GO
 --70. Cambiar estado de una cita
 UPDATE Gestiones.Citas SET estado = 'En proceso' WHERE idCita = 1
 GO
+
+--71. Actualizar costo de consulta
+UPDATE Gestiones.Citas SET costo = 10.75 WHERE idCita = 1
+GO
