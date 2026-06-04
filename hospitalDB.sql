@@ -129,4 +129,9 @@ ALTER TABLE Gestiones.Pacientes
 	ALTER COLUMN direccion NVARCHAR(100) NOT NULL
 GO
 
---28, 30, 31, 32
+--33, 34 Agregación de columnas a tabla Medicos
+ALTER TABLE Empleados.Medicos
+	ADD experiencia NVARCHAR(120) NOT NULL
+	, turno VARCHAR(10) CONSTRAINT CK_turno_val CHECK(turno IN ('Matutino', 'Diurno', 'Nocturno'))
+GO
+
