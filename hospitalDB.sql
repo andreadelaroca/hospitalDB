@@ -121,5 +121,12 @@ ALTER TABLE Gestiones.Pacientes
 GO
 
 --31, 32. Modificación de tabla Pacientes
+ALTER TABLE Gestiones.Pacientes
+	ALTER COLUMN nombres NVARCHAR(40) NOT NULL 
+GO
+
+ALTER TABLE Gestiones.Pacientes
+	ALTER COLUMN direccion NVARCHAR(100) NOT NULL
+GO
 
 --28, 30, 31, 32
