@@ -20,3 +20,15 @@ GO
 --3. Seleccionar HospitalDB para trabajar
 USE HospitalDB
 GO
+
+--4.1 Creación de esquemas
+CREATE SCHEMA Pacientes
+GO
+
+CREATE SCHEMA Medicos
+GO
+
+CREATE SCHEMA Hospital
+GO
+
+--4.2
