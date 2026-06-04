@@ -486,3 +486,8 @@ GO
 --95. Mostrar pacientes ordenados por apellido
 SELECT * FROM Gestiones.Pacientes ORDER BY apellidos DESC
 GO
+
+--96. Mostrar médicos ordenados por salario.
+SELECT * FROM Empleados.Medicos ORDER BY salario DESC
+GO
+
