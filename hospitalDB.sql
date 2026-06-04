@@ -72,7 +72,6 @@ GO
 CREATE TABLE Gestiones.Citas (
 	idCita INT IDENTITY(1,1) CONSTRAINT PK_idCita PRIMARY KEY
 	, fecha DATETIME NOT NULL
-	, estado VARCHAR(20) CONSTRAINT CK_estado_val CHECK(estado IN ('Agendada', 'Confirmada', 'En proceso', 'Completada', 'Cancelada', 'Inasistencia', 'Reprogramada'))
 	, idPaciente INT CONSTRAINT FK_idPaciente REFERENCES Gestiones.Pacientes(idPaciente) --21. FOREIGN KEY entre Citas y Pacientes
 	, idMedico INT CONSTRAINT FK_idMedico REFERENCES Empleados.Medicos(idMedico) --22. FOREIGN KEY entre Citas y Médicos
 	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
@@ -135,12 +134,19 @@ ALTER TABLE Empleados.Medicos
 	, turno VARCHAR(10) CONSTRAINT CK_turno_val CHECK(turno IN ('Matutino', 'Diurno', 'Nocturno'))
 GO
 
---35. Agregar columna observaciones
+--35, 37, 38. Agregar columna observaciones
 ALTER TABLE Gestiones.Citas
 	ADD observaciones NVARCHAR(120) NOT NULL
+	, estado VARCHAR(20) CONSTRAINT CK_estado_val CHECK(estado IN ('Agendada', 'Confirmada', 'En proceso', 'Completada', 'Cancelada', 'Inasistencia', 'Reprogramada'))
+	, costo INT NOT NULL CONSTRAINT CK_costo CHECK(costo > 0)
 GO
 
 --36. Eliminar columna observaciones
 ALTER TABLE Gestiones.Citas
 	DROP COLUMN observaciones
+GO
+
+--39. Modificar tipo el dato costo
+ALTER TABLE Gestiones.Citas
+	ALTER COLUMN costo DECIMAL(4,2)
 GO
