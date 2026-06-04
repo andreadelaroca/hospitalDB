@@ -434,3 +434,7 @@ GO
 --82. Eliminar una cita
 DELETE FROM Gestiones.Citas WHERE idCita = 15
 GO
+
+--83. Eliminar un medicamento
+DELETE FROM Hospital.Medicamentos WHERE idMedicamento = 20
+GO
