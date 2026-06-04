@@ -452,3 +452,9 @@ GO
 DELETE FROM Gestiones.Citas WHERE estado = 'Cancelado'
 GO
 
+--87. Eliminar pacientes sin citas
+
+
+--88. Eliminar habitaciones vacías
+DELETE FROM Hospital.Habitaciones WHERE disponibilidad = 1
+GO
