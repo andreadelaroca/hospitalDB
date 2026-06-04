@@ -168,7 +168,11 @@ GO
 
 --43. Eliminar una restricción UNIQUE
 ALTER TABLE Empleados.Medicos
-	DROP CONSTRAINT UQ_correo_med
+	ADD idPaciente INT CONSTRAINT FK_idPaciente_med FOREIGN KEY REFERENCES Gestiones.Pacientes(idPaciente)
+GO
+
+ALTER TABLE Empleados.Medicos
+	DROP CONSTRAINT Fk_idPaciente_med
 GO
 
 --44. Eliminar una columna
@@ -177,22 +181,22 @@ ALTER TABLE Hospital.Habitaciones
 GO
 
 --45. Eliminar una tabla de pruebas
-CREATE TABLE Pruebas (
+CREATE TABLE Hospital.Pruebas (
 	nombres NVARCHAR(20)
 )
 GO
 
-DROP TABLE IF EXISTS Pruebas
+DROP TABLE IF EXISTS Hospital.Pruebas
 GO
 
 --46. Crear y eliminar una tabla Auditoria
-CREATE TABLE Auditoria (
+CREATE TABLE Hospital.Auditoria (
 	idAuditoria INT IDENTITY(1,1) PRIMARY KEY
 	, operacion NVARCHAR(30) NOT NULL
 )
 GO
 
-DROP TABLE IF EXISTS Auditoria
+DROP TABLE IF EXISTS Hospital.Auditoria
 GO
 
 --47. Crear y eliminar una tabla Logs
@@ -214,3 +218,11 @@ ALTER TABLE Hospital.Tratamientos
 	DROP CONSTRAINT FK_idMedico_trat
 GO
 
+--49. Eliminar una tabla MedicamentosPrueba
+CREATE TABLE Hospital.MedicamentosPrueba (
+	medicamento NVARCHAR(20)
+)
+GO
+
+DROP TABLE Hospital.MedicamentosPrueba
+GO
