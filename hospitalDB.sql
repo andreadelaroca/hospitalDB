@@ -406,3 +406,7 @@ GO
 UPDATE Hospital.Medicamentos SET estado = 'Vigente' WHERE idMedicamento = 10
 GO
 
+--76. Actualizar correo de paciente.
+UPDATE Gestiones.Pacientes SET correo = 'a@gmail.com' WHERE idPaciente = 1
+GO
+
