@@ -36,7 +36,7 @@ CREATE TABLE Gestiones.Pacientes (
 	, nombres NVARCHAR(60) NOT NULL --13. nombre NOT NULL
 	, apellidos NVARCHAR(60) NOT NULL
 	, correo NVARCHAR(100) CONSTRAINT UQ_correo_pac UNIQUE --15. correo UNIQUE
-	, edad TINYINT CONSTRAINT CK_edad_val_pac CHECK(edad > 0) --17. CHECK para edad mayor o igual a 0.
+	, edad INT CONSTRAINT CK_edad_val_pac CHECK(edad > 0) --17. CHECK para edad mayor o igual a 0.
 	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
 	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
 	, fechaEliminado DATETIME NULL
@@ -59,7 +59,7 @@ CREATE TABLE Empleados.Medicos (
 	, nombres NVARCHAR(60) NOT NULL --14. nombre NOT NULL 
 	, apellidos NVARCHAR(60) NOT NULL
 	, correo NVARCHAR(100) CONSTRAINT UQ_correo_med UNIQUE --16. correo UNIQUE
-	, edad DATE CONSTRAINT CK_edad_val_med CHECK(edad > 0) --17. CHECK para edad mayor o igual a 0.
+	, edad INT CONSTRAINT CK_edad_val_med CHECK(edad > 0) --17. CHECK para edad mayor o igual a 0.
 	, salario DECIMAL(5,2) CONSTRAINT CK_salario_val CHECK(salario > 0) --18. CHECK salario mayor a 0.
 	, idEspecialidad INT CONSTRAINT FK_idEspecialidad REFERENCES Empleados.Especialidades(idEspecialidad) --20. FOREIGN KEY entre Médicos y Especialidades.
 	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
@@ -105,7 +105,7 @@ CREATE TABLE Hospital.Medicamentos (
 	idMedicamento INT IDENTITY(1,1) CONSTRAINT PK_idMedicamento PRIMARY KEY
 	, idTratamiento INT CONSTRAINT FK_idTratamiento FOREIGN KEY REFERENCES Hospital.Tratamientos(idTratamiento) -- 24. FOREIGN KEY entre Medicamentos y Tratamientos.
 	, nombre NVARCHAR(50) NOT NULL
-	, estado VARCHAR(20) CONSTRAINT CK_estado_val CHECK(estado IN ('Vigente', 'Vencido'))
+	, estado VARCHAR(20) CONSTRAINT CK_estado_med_val CHECK(estado IN ('Vigente', 'Vencido'))
 	, dosis DECIMAL (4,2) NOT NULL CONSTRAINT CK_dosis_val CHECK(dosis > 0)
 )
 GO
@@ -138,7 +138,7 @@ GO
 ALTER TABLE Gestiones.Citas
 	ADD observaciones NVARCHAR(120) NOT NULL
 	, estado VARCHAR(20) CONSTRAINT CK_estado_val CHECK(estado IN ('Agendada', 'Confirmada', 'En proceso', 'Completada', 'Cancelada', 'Inasistencia', 'Reprogramada'))
-	, costo INT NOT NULL CONSTRAINT CK_costo CHECK(costo > 0)
+	, costo INT NOT NULL
 GO
 
 --36. Eliminar columna observaciones
@@ -148,5 +148,12 @@ GO
 
 --39. Modificar tipo el dato costo
 ALTER TABLE Gestiones.Citas
-	ALTER COLUMN costo DECIMAL(4,2)
+	ALTER COLUMN costo DECIMAL(4,2) NOT NULL
 GO
+
+--40. Agregar columna disponibilidad a Habitaciones
+ALTER TABLE Hospital.Habitaciones
+	ADD disponibilidad BIT DEFAULT 1
+GO
+
+--41. Eliminar una tabla temporal
