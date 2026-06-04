@@ -32,23 +32,24 @@ CREATE SCHEMA Hospital
 GO
 
 --4.2 Creación de tablas
-CREATE TABLE Pacientes
+CREATE TABLE Pacientes.Pacientes
 GO
 
-CREATE TABLE Medicos
+CREATE TABLE Medicos.Medicos
 GO
 
-CREATE TABLE Especialidades
+CREATE TABLE Medicos.Especialidades
 GO
 
-CREATE TABLE Citas
+CREATE TABLE Pacientes.Citas
 GO
 
-CREATE TABLE Habitaciones
+CREATE TABLE Hospital.Habitaciones
 GO
 
-CREATE TABLE Tratamientos
+CREATE TABLE Hospital.Medicamentos
 GO
 
-CREATE TABLE Medicamentos
+CREATE TABLE Hospital.Tratamientos
 GO
+
