@@ -48,6 +48,9 @@ GO
 CREATE TABLE Empleados.Especialidades (
 	idEspecialidad INT IDENTITY(1,1) CONSTRAINT PK_Especialidad PRIMARY KEY
 	, nombre NVARCHAR(30) NOT NULL
+	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
+	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
+	, fechaEliminado DATETIME NULL
 )
 GO
 
@@ -67,7 +70,14 @@ CREATE TABLE Empleados.Medicos (
 GO
 
 --7. Creación de tabla Citas
-CREATE TABLE Gestiones.Citas
+CREATE TABLE Gestiones.Citas (
+	idCita INT IDENTITY(1,1) CONSTRAINT PK_idCita PRIMARY KEY
+	, fecha DATETIME NOT NULL
+	, estado VARCHAR(20) CONSTRAINT CK_estado_val CHECK(estado IN ('Agendada', 'Confirmada', 'En proceso', 'Completada', 'Cancelada', 'Inasistencia', 'Reprogramada'))
+	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
+	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
+	, fechaEliminado DATETIME NULL
+)
 GO
 
 --8. Creación de tabla Habitaciones
