@@ -34,30 +34,36 @@ GO
 --4. Creación de tabla Pacientes
 CREATE TABLE Gestiones.Pacientes (
 	idPaciente INT IDENTITY(1,1) CONSTRAINT PK_idPaciente PRIMARY KEY --11. PK Pacientes
-	, nombre NVARCHAR(60) NOT NULL --13. nombre NOT NULL 
+	, nombres NVARCHAR(60) NOT NULL --13. nombre NOT NULL
+	, apellidos NVARCHAR(60) NOT NULL
 	, correo NVARCHAR(100) CONSTRAINT UQ_correo_pac UNIQUE --15. correo UNIQUE
-	, fechaNac DATE CONSTRAINT CK_edad_val_pac CHECK(fechanac >= GETDATE()) --17. CHECK para edad mayor o igual a 0.
-	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE()
-	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
-	, fechaEliminado DATETIME NULL
-)
-GO
-
---5. Creación de tabla Medicos
-CREATE TABLE Empleados.Medicos (
-	idMedico INT IDENTITY(1,1) CONSTRAINT PK_idMedico PRIMARY KEY --12. PK Medicos
-	, nombre NVARCHAR(60) NOT NULL --14. nombre NOT NULL 
-	, correo NVARCHAR(100) CONSTRAINT UQ_correo_med UNIQUE --16. correo UNIQUE
-	, fechanac DATE CONSTRAINT CK_edad_val_med CHECK(fechanac >= GETDATE()) --17. CHECK para edad mayor o igual a 0.
-	, salario DECIMAL(5,2) CONSTRAINT CK_salario_val CHECK(salario > 0)
-	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE()
+	, edad TINYINT CONSTRAINT CK_edad_val_pac CHECK(edad > 0) --17. CHECK para edad mayor o igual a 0.
+	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
 	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
 	, fechaEliminado DATETIME NULL
 )
 GO
 
 --6. Creación de tabla Especialidades
-CREATE TABLE Empleados.Especialidades
+CREATE TABLE Empleados.Especialidades (
+	idEspecialidad INT IDENTITY(1,1) CONSTRAINT PK_Especialidad PRIMARY KEY
+	, nombre NVARCHAR(30) NOT NULL
+)
+GO
+
+--5. Creación de tabla Medicos
+CREATE TABLE Empleados.Medicos (
+	idMedico INT IDENTITY(1,1) CONSTRAINT PK_idMedico PRIMARY KEY --12. PK Medicos
+	, nombres NVARCHAR(60) NOT NULL --14. nombre NOT NULL 
+	, apellidos NVARCHAR(60) NOT NULL
+	, correo NVARCHAR(100) CONSTRAINT UQ_correo_med UNIQUE --16. correo UNIQUE
+	, edad DATE CONSTRAINT CK_edad_val_med CHECK(edad > 0) --17. CHECK para edad mayor o igual a 0.
+	, salario DECIMAL(5,2) CONSTRAINT CK_salario_val CHECK(salario > 0) --18. CHECK salario mayor a 0.
+	, idEspecialidad INT CONSTRAINT FK_idEspecialidad REFERENCES Empleados.Especialidades(idEspecialidad) --20. FOREIGN KEY entre Médicos y Especialidades.
+	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
+	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
+	, fechaEliminado DATETIME NULL
+)
 GO
 
 --7. Creación de tabla Citas
@@ -76,3 +82,5 @@ GO
 CREATE TABLE Hospital.Tratamientos
 GO
 
+
+--, fechanac DATE CONSTRAINT CK_edad_val_med CHECK(fechanac >= GETDATE()) --17. CHECK para edad mayor o igual a 0.
