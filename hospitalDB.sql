@@ -417,3 +417,7 @@ GO
 --78. Actualizar fecha de cita.
 UPDATE Gestiones.Citas SET fecha = '2026-04-08' WHERE idCita = 1
 GO
+
+--79. Actualizar experiencia del médico.
+UPDATE Empleados.Medicos SET experiencia = '5 años de trabajo en el Hospital Militar en el área de Radiología' WHERE idMedico = 1
+GO
