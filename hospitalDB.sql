@@ -305,3 +305,17 @@ INSERT INTO Gestiones.Citas (fecha, idPaciente, idMedico, estado, costo) VALUES
 	(GETDATE(), 6, 6, 'Reprogramada', 45.00),
 	(GETDATE(), 7, 7, 'Confirmada', 50.00)
 GO
+
+--55. Insertar 10 habitaciones
+INSERT INTO Hospital.Habitaciones (codigo, idPaciente, disponibilidad) VALUES
+	('HAB-101', 1, 0), -- Ocupada
+	('HAB-102', 2, 0), -- Ocupada
+	('HAB-103', 3, 0), -- Ocupada
+	('HAB-104', 4, 0), -- Ocupada
+	('HAB-105', 5, 0), -- Ocupada
+	('HAB-201', NULL, 1), -- Disponible
+	('HAB-202', NULL, 1), -- Disponible
+	('HAB-203', NULL, 1), -- Disponible
+	('HAB-204', NULL, 1), -- Disponible
+	('HAB-205', NULL, 1); -- Disponible
+GO
