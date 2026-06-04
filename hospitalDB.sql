@@ -177,8 +177,13 @@ ALTER TABLE Hospital.Habitaciones
 GO
 
 --45. Eliminar una tabla de pruebas
-CREATE TABLE Pruebas (nombres NVARCHAR(20)) GO
-DROP TABLE Pruebas
+CREATE TABLE Pruebas (
+	nombres NVARCHAR(20)
+)
+GO
+
+DROP TABLE IF EXISTS Pruebas
+GO
 
 --46. Crear y eliminar una tabla Auditoria
 CREATE TABLE Auditoria (
@@ -187,7 +192,7 @@ CREATE TABLE Auditoria (
 )
 GO
 
-DROP TABLE Auditoria
+DROP TABLE IF EXISTS Auditoria
 GO
 
 --47. Crear y eliminar una tabla Logs
@@ -198,5 +203,14 @@ CREATE TABLE Logs (
 GO
 
 DROP TABLE Logs
+GO
+
+--48. Eliminar una FOREIGN KEY
+ALTER TABLE Hospital.Tratamientos
+	ADD idMedico INT CONSTRAINT FK_idMedico_trat FOREIGN KEY REFERENCES Empleados.Medicos (idMedico)
+GO
+
+ALTER TABLE Hospital.Tratamientos
+	DROP CONSTRAINT FK_idMedico_trat
 GO
 
