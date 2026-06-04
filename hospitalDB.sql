@@ -394,4 +394,7 @@ GO
 UPDATE Empleados.Especialidades SET nombre = 'Gastroentología' WHERE idEspecialidad = 1
 GO
 
---73
+--73. Actualizar disponibilidad de habitación.
+UPDATE Hospital.Habitaciones SET disponibilidad = 1 WHERE idHabitacion = 1
+GO
+
