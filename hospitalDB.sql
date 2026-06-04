@@ -421,3 +421,8 @@ GO
 --79. Actualizar experiencia del médico.
 UPDATE Empleados.Medicos SET experiencia = '5 años de trabajo en el Hospital Militar en el área de Radiología' WHERE idMedico = 1
 GO
+
+--80. Actualizar tipo de sangre
+UPDATE Gestiones.Pacientes SET tipo_sangre = 'AB+' WHERE idPaciente = 1
+GO
+
