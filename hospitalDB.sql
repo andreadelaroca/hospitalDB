@@ -430,3 +430,7 @@ GO
 --81. Eliminar un paciente específico.
 DELETE FROM Gestiones.Pacientes WHERE idPaciente = 21
 GO
+
+--82. Eliminar una cita
+DELETE FROM Gestiones.Citas WHERE idCita = 15
+GO
