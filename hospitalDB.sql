@@ -270,3 +270,27 @@ INSERT INTO Empleados.Medicos (nombres, apellidos, correo, edad, salario, idEspe
 	('David', 'Flores', 'david.flores@hospital.com', 43, 650.00, 4, '11 años en cáncer de piel', 'Nocturno'),
 	('Laura', 'Castro', 'laura.castro@hospital.com', 46, 875.30, 5, '14 años en cirugía de reemplazo articular', 'Matutino');
 GO
+
+--53. Insertar 20 pacientes
+INSERT INTO Gestiones.Pacientes (nombres, apellidos, correo, edad, telefono, direccion, genero, tipo_sangre, fechanac) VALUES
+	('Juan', 'Jiménez', 'juan.jimenez@mail.com', 25, '555-0101', 'Calle Falsa 123', 1, 'O+', GETDATE()),
+	('Lucía', 'Díaz', 'lucia.diaz@mail.com', 30, '555-0102', 'Av. Central 456', 0, 'A+', GETDATE()),
+	('Miguel', 'Álvarez', 'miguel.alvarez@mail.com', 45, '555-0103', 'Pasaje Los Pinos 789', 1, 'B+', GETDATE()),
+	('Rosa', 'Moreno', 'rosa.moreno@mail.com', 60, '555-0104', 'Alameda Principal 101', 0, 'O-', GETDATE()),
+	('Daniel', 'Benítez', 'daniel.benitez@mail.com', 18, '555-0105', 'Callejón Oscuro 202', 1, 'AB+', GETDATE()),
+	('Carmen', 'Ruiz', 'carmen.ruiz@mail.com', 34, '555-0106', 'Boulevard Norte 303', 0, 'A-', GETDATE()),
+	('Alejandro', 'Gutiérrez', 'alejandro.gut@mail.com', 22, '555-0107', 'Avenida del Sol 404', 1, 'O+', GETDATE()),
+	('Patricia', 'Ortega', 'patricia.ort@mail.com', 29, '555-0108', 'Ruta 66 Kilómetro 5', 0, 'B-', GETDATE()),
+	('Roberto', 'Rubio', 'roberto.rubio@mail.com', 51, '555-0109', 'Calle Las Flores 505', 1, 'A+', GETDATE()),
+	('Francisca', 'Marín', 'fran.marin@mail.com', 40, '555-0110', 'Avenida de la Paz 606', 0, 'O+', GETDATE()),
+	('Santiago', 'Sanz', 'santiago.sanz@mail.com', 12, '555-0111', 'Barrio Universitario 707', 1, 'AB-', GETDATE()),
+	('Teresa', 'Nuñez', 'teresa.nunez@mail.com', 68, '555-0112', 'Residencial El Lago 808', 0, 'O+', GETDATE()),
+	('Ricardo', 'Medina', 'ricardo.med@mail.com', 37, '555-0113', 'Calle del Oro 909', 1, 'A+', GETDATE()),
+	('Isabel', 'Castillo', 'isabel.cas@mail.com', 55, '555-0114', 'Urbanización Real 111', 0, 'B+', GETDATE()),
+	('Gabriel', 'Cortes', 'gabriel.cortes@mail.com', 27, '555-0115', 'Calle de la Luna 222', 1, 'O-', GETDATE()),
+	('Sara', 'Garrido', 'sara.garrido@mail.com', 31, '555-0116', 'Pasaje del Arte 333', 0, 'A+', GETDATE()),
+	('Alberto', 'Lozano', 'alberto.loz@mail.com', 48, '555-0117', 'Avenida Libertad 444', 1, 'O+', GETDATE()),
+	('Raquel', 'Blanco', 'raquel.blanco@mail.com', 23, '555-0118', 'Calle del Pino 555', 0, 'AB+', GETDATE()),
+	('Enrique', 'Vidal', 'enrique.vidal@mail.com', 62, '555-0119', 'Plaza Mayor 666', 1, 'A-', GETDATE()),
+	('Victoria', 'Prieto', 'victoria.prieto@mail.com', 19, '555-0120', 'Paseo Marítimo 777', 0, 'O+', GETDATE());
+GO
