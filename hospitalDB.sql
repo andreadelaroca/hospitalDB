@@ -478,3 +478,11 @@ GO
 --93. Mostrar todas las especialidades
 SELECT * FROM Empleados.Especialidades
 GO
+
+--94. Mostrar todas las citas
+SELECT * FROM Gestiones.Citas
+GO
+
+--95. Mostrar pacientes ordenados por apellido
+SELECT * FROM Gestiones.Pacientes ORDER BY apellidos DESC
+GO
