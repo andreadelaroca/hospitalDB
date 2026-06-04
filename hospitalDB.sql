@@ -496,6 +496,16 @@ SELECT * FROM Gestiones.Citas WHERE fecha = GETDATE()
 GO
 
 --98. Mostrar habitaciones disponibles
-SELECT * FROM Hospital.Habitaciones WHERE estado = 0
+SELECT * FROM Hospital.Habitaciones WHERE disponibilidad = 0
 GO
 
+--99. Mostrar cantidad de pacientes registrados
+SELECT COUNT(idPaciente) as N'Pacientes Registrados' FROM Gestiones.Pacientes
+GO
+
+--100. Mostrar cantidad de citas por médico
+SELECT 
+	COUNT(c.idCita) as Citas,
+	CONCAT(m.nombres, ' ', m.apellidos) as N'Médico'
+FROM Gestiones.Citas as c INNER JOIN Empleados.Medicos as m ON c.idMedico = m.idMedico
+GO
