@@ -83,6 +83,7 @@ GO
 --8. Creación de tabla Habitaciones
 CREATE TABLE Hospital.Habitaciones (
 	idHabitacion INT IDENTITY(1,1) CONSTRAINT PK_idHabitacion PRIMARY KEY
+	, edificio CHAR NOT NULL
 	, codigo VARCHAR(20) NOT NULL
 	, idPaciente INT NULL CONSTRAINT FK_idPaciente FOREIGN KEY REFERENCES Gestiones.Pacientes(idPaciente) --25.FOREIGN KEY entre Habitaciones y Pacientes
 )
@@ -166,7 +167,11 @@ ALTER TABLE Gestiones.Pacientes
 GO
 
 --43. Eliminar una restricción UNIQUE
-ALTER TABLE Gestiones.Medicos
+ALTER TABLE Empleados.Medicos
 	DROP CONSTRAINT UQ_correo_med
 GO
 
+--44. Eliminar una columna
+ALTER TABLE Hospital.Habitaciones
+	DROP COLUMN edificio
+GO
