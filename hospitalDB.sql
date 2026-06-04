@@ -410,3 +410,7 @@ GO
 UPDATE Gestiones.Pacientes SET correo = 'a@gmail.com' WHERE idPaciente = 1
 GO
 
+--77. Actualizar correo de médico.
+UPDATE Empleados.Medicos SET correo = 'b@gmail.com' WHERE idMedico = 1
+GO
+
