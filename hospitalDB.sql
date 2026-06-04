@@ -340,7 +340,8 @@ INSERT INTO Hospital.Tratamientos (descripcion, estado, idPaciente) VALUES
 	('Tratamiento dermatológico para dermatitis', 'Finalizado', 7),
 	('Manejo del dolor por migraña crónica', 'Finalizado', 8),
 	('Corrección de postura y columna', 'Finalizado', 9),
-	('Tratamiento antiviral por hepatitis', 'Finalizado', 10)
+	('Tratamiento antiviral por hepatitis', 'Finalizado', 10),
+	('Tratamiento para sindrome del papu', 'Activo', 10)
 GO
 
 --57. Insertar 20 medicamentos
@@ -441,4 +442,8 @@ GO
 
 --84. Eliminar una habitación
 DELETE FROM Hospital.Habitaciones WHERE idHabitacion = 10
+GO
+
+--85. Eliminar un tratamiento
+DELETE FROM Hospital.Tratamientos WHERE idTratamiento = 11
 GO
