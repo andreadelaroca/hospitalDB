@@ -117,7 +117,7 @@ ALTER TABLE Gestiones.Pacientes
 	, direccion NVARCHAR(120) NOT NULL
 	, genero BIT NOT NULL
 	, tipo_sangre VARCHAR(4) CONSTRAINT CK_tipo_sangre_val CHECK(tipo_sangre IN ('%A%', '%B%', 'O%', '%+', '%-'))
-	, fechanac DATE CONSTRAINT CK_edad_val_med CHECK(fechanac >= GETDATE())
+	, fechanac DATE
 GO
 
 --31, 32. Modificación de tabla Pacientes
@@ -257,7 +257,7 @@ INSERT INTO Empleados.Especialidades (nombre) VALUES
 GO
 
 
---52. Insertar 10 médicos
+--52, 59. Insertar 10 médicos
 INSERT INTO Empleados.Medicos (nombres, apellidos, correo, edad, salario, idEspecialidad, experiencia, turno) VALUES
 	('Carlos', 'Pérez', 'carlos.perez@hospital.com', 45, 850.50, 1, '15 años en cardiología clínica', 'Matutino'),
 	('Ana', 'Gómez', 'ana.gomez@hospital.com', 38, 720.00, 2, '10 años en pediatría neonatal', 'Diurno'),
@@ -271,31 +271,31 @@ INSERT INTO Empleados.Medicos (nombres, apellidos, correo, edad, salario, idEspe
 	('Laura', 'Castro', 'laura.castro@hospital.com', 46, 875.30, 5, '14 años en cirugía de reemplazo articular', 'Matutino')
 GO
 
---53. Insertar 20 pacientes
+--53, 58. Insertar 20 pacientes
 INSERT INTO Gestiones.Pacientes (nombres, apellidos, correo, edad, telefono, direccion, genero, tipo_sangre, fechanac) VALUES
-	('Juan', 'Jiménez', 'juan.jimenez@mail.com', 25, '555-0101', 'Calle Falsa 123', 1, 'O+', GETDATE()),
-	('Lucía', 'Díaz', 'lucia.diaz@mail.com', 30, '555-0102', 'Av. Central 456', 0, 'A+', GETDATE()),
-	('Miguel', 'Álvarez', 'miguel.alvarez@mail.com', 45, '555-0103', 'Pasaje Los Pinos 789', 1, 'B+', GETDATE()),
-	('Rosa', 'Moreno', 'rosa.moreno@mail.com', 60, '555-0104', 'Alameda Principal 101', 0, 'O-', GETDATE()),
-	('Daniel', 'Benítez', 'daniel.benitez@mail.com', 18, '555-0105', 'Callejón Oscuro 202', 1, 'AB+', GETDATE()),
-	('Carmen', 'Ruiz', 'carmen.ruiz@mail.com', 34, '555-0106', 'Boulevard Norte 303', 0, 'A-', GETDATE()),
-	('Alejandro', 'Gutiérrez', 'alejandro.gut@mail.com', 22, '555-0107', 'Avenida del Sol 404', 1, 'O+', GETDATE()),
-	('Patricia', 'Ortega', 'patricia.ort@mail.com', 29, '555-0108', 'Ruta 66 Kilómetro 5', 0, 'B-', GETDATE()),
-	('Roberto', 'Rubio', 'roberto.rubio@mail.com', 51, '555-0109', 'Calle Las Flores 505', 1, 'A+', GETDATE()),
-	('Francisca', 'Marín', 'fran.marin@mail.com', 40, '555-0110', 'Avenida de la Paz 606', 0, 'O+', GETDATE()),
-	('Santiago', 'Sanz', 'santiago.sanz@mail.com', 12, '555-0111', 'Barrio Universitario 707', 1, 'AB-', GETDATE()),
-	('Teresa', 'Nuñez', 'teresa.nunez@mail.com', 68, '555-0112', 'Residencial El Lago 808', 0, 'O+', GETDATE()),
-	('Ricardo', 'Medina', 'ricardo.med@mail.com', 37, '555-0113', 'Calle del Oro 909', 1, 'A+', GETDATE()),
-	('Isabel', 'Castillo', 'isabel.cas@mail.com', 55, '555-0114', 'Urbanización Real 111', 0, 'B+', GETDATE()),
-	('Gabriel', 'Cortes', 'gabriel.cortes@mail.com', 27, '555-0115', 'Calle de la Luna 222', 1, 'O-', GETDATE()),
-	('Sara', 'Garrido', 'sara.garrido@mail.com', 31, '555-0116', 'Pasaje del Arte 333', 0, 'A+', GETDATE()),
-	('Alberto', 'Lozano', 'alberto.loz@mail.com', 48, '555-0117', 'Avenida Libertad 444', 1, 'O+', GETDATE()),
-	('Raquel', 'Blanco', 'raquel.blanco@mail.com', 23, '555-0118', 'Calle del Pino 555', 0, 'AB+', GETDATE()),
-	('Enrique', 'Vidal', 'enrique.vidal@mail.com', 62, '555-0119', 'Plaza Mayor 666', 1, 'A-', GETDATE()),
-	('Victoria', 'Prieto', 'victoria.prieto@mail.com', 19, '555-0120', 'Paseo Marítimo 777', 0, 'O+', GETDATE())
+	('Juan', 'Jiménez', 'juan.jimenez@mail.com', 25, '55580101', 'Calle Falsa 123', 1, 'O+', '2001-01-02'),
+	('Lucía', 'Díaz', 'lucia.diaz@mail.com', 30, '55590102', 'Av. Central 456', 0, 'A+', '1996-02-03'),
+	('Miguel', 'Álvarez', 'miguel.alvarez@mail.com', 45, '55590103', 'Pasaje Los Pinos 789', 1, 'B+', '1981-03-12'),
+	('Rosa', 'Moreno', 'rosa.moreno@mail.com', 60, '55530104', 'Alameda Principal 101', 0, 'O-', '1966-04-15'),
+	('Daniel', 'Benítez', 'daniel.benitez@mail.com', 18, '55530105', 'Callejón Oscuro 202', 1, 'AB+', '2008-05-07'),
+	('Carmen', 'Ruiz', 'carmen.ruiz@mail.com', 34, '55530106', 'Boulevard Norte 303', 0, 'A-', '1992-06-05'),
+	('Alejandro', 'Gutiérrez', 'alejandro.gut@mail.com', 22, '55520107', 'Avenida del Sol 404', 1, 'O+', '2004-06-11'),
+	('Patricia', 'Ortega', 'patricia.ort@mail.com', 29, '55540108', 'Ruta 66 Kilómetro 5', 0, 'B-', '1997-07-22'),
+	('Roberto', 'Rubio', 'roberto.rubio@mail.com', 51, '55510109', 'Calle Las Flores 505', 1, 'A+', '1974-08-27'),
+	('Francisca', 'Marín', 'fran.marin@mail.com', 40, '55560110', 'Avenida de la Paz 606', 0, 'O+', '1986-09-20'),
+	('Santiago', 'Sanz', 'santiago.sanz@mail.com', 12, '55570111', 'Barrio Universitario 707', 1, 'AB-', '2014-10-08'),
+	('Teresa', 'Nuñez', 'teresa.nunez@mail.com', 68, '55550112', 'Residencial El Lago 808', 0, 'O+', '1958-11-26'),
+	('Ricardo', 'Medina', 'ricardo.med@mail.com', 37, '52570113', 'Calle del Oro 909', 1, 'A+', '1989-12-25'),
+	('Isabel', 'Castillo', 'isabel.cas@mail.com', 55, '5570114', 'Urbanización Real 111', 0, 'B+', '1971-01-28'),
+	('Gabriel', 'Cortes', 'gabriel.cortes@mail.com', 27, '5522115', 'Calle de la Luna 222', 1, 'O-', '1999-02-26'),
+	('Sara', 'Garrido', 'sara.garrido@mail.com', 31, '55550116', 'Pasaje del Arte 333', 0, 'A+', '1995-03-22'),
+	('Alberto', 'Lozano', 'alberto.loz@mail.com', 48, '5550117', 'Avenida Libertad 444', 1, 'O+', '1977-04-15'),
+	('Raquel', 'Blanco', 'raquel.blanco@mail.com', 23, '5550118', 'Calle del Pino 555', 0, 'AB+', '2003-05-07'),
+	('Enrique', 'Vidal', 'enrique.vidal@mail.com', 62, '5550119', 'Plaza Mayor 666', 1, 'A-', '1964-06-06'),
+	('Victoria', 'Prieto', 'victoria.prieto@mail.com', 19, '55566120', 'Paseo Marítimo 777', 0, 'O+', '2007-01-15')
 GO
 
---54. Insertar 15 citas
+--54, 60, 61. Insertar 15 citas
 INSERT INTO Gestiones.Citas (fecha, idPaciente, idMedico, estado, costo) VALUES
 	(GETDATE(), 1, 1, 'Confirmada', 45.00),
 	(GETDATE(), 2, 2, 'En proceso', 50.00),
@@ -303,24 +303,32 @@ INSERT INTO Gestiones.Citas (fecha, idPaciente, idMedico, estado, costo) VALUES
 	(GETDATE(), 4, 4, 'Confirmada', 40.00),
 	(GETDATE(), 5, 5, 'Agendada', 55.00),
 	(GETDATE(), 6, 6, 'Reprogramada', 45.00),
-	(GETDATE(), 7, 7, 'Confirmada', 50.00)
+	(GETDATE(), 7, 7, 'Confirmada', 50.00),
+	(DATEADD(day, 2, GETDATE()), 8, 8, 'Agendada', 60.00),
+	(DATEADD(day, 4, GETDATE()), 9, 9, 'Agendada', 40.00),
+	(DATEADD(day, 5, GETDATE()), 10, 10, 'Agendada', 55.00),
+	(DATEADD(day, 7, GETDATE()), 11, 1, 'Confirmada', 45.00),
+	(DATEADD(day, 9, GETDATE()), 12, 2, 'Agendada', 50.00),
+	(DATEADD(day, 12, GETDATE()), 13, 3, 'Agendada', 65.50),
+	(DATEADD(day, 15, GETDATE()), 14, 4, 'Agendada', 40.00),
+	(DATEADD(day, 20, GETDATE()), 15, 5, 'Agendada', 55.00);
 GO
 
---55. Insertar 10 habitaciones
+--55, 62, 63. Insertar 10 habitaciones
 INSERT INTO Hospital.Habitaciones (codigo, idPaciente, disponibilidad) VALUES
-	('HAB-101', 1, 0), -- Ocupada
-	('HAB-102', 2, 0), -- Ocupada
-	('HAB-103', 3, 0), -- Ocupada
-	('HAB-104', 4, 0), -- Ocupada
-	('HAB-105', 5, 0), -- Ocupada
-	('HAB-201', NULL, 1), -- Disponible
-	('HAB-202', NULL, 1), -- Disponible
-	('HAB-203', NULL, 1), -- Disponible
-	('HAB-204', NULL, 1), -- Disponible
-	('HAB-205', NULL, 1); -- Disponible
+	('HAB-101', 1, 0),
+	('HAB-102', 2, 0),
+	('HAB-103', 3, 0),
+	('HAB-104', 4, 0),
+	('HAB-105', 5, 0),
+	('HAB-201', NULL, 1),
+	('HAB-202', NULL, 1),
+	('HAB-203', NULL, 1),
+	('HAB-204', NULL, 1),
+	('HAB-205', NULL, 1)
 GO
 
---56. Insertar 10 tratamientos
+--56, 64, 65. Insertar 10 tratamientos
 INSERT INTO Hospital.Tratamientos (descripcion, estado, idPaciente) VALUES
 	('Tratamiento de hipertensión arterial crónica', 'Activo', 1),
 	('Quimioterapia preventiva etapa inicial', 'Activo', 2),
@@ -357,3 +365,12 @@ INSERT INTO Hospital.Medicamentos (idTratamiento, nombre, estado, dosis) VALUES
 	(10, 'Ribavirina 200mg', 'Vigente', 3.50),
 	(10, 'Interferón Alfa', 'Vigente', 1.00)
 GO
+
+--66. Actualizar teléfono de un paciente
+UPDATE Gestiones.Pacientes SET telefono = '88888888' WHERE idPaciente = 1
+GO
+
+--67. Actualizar dirección de un paciente
+UPDATE Gestiones.Pacientes SET direccion = 'Vistas de Esquipulas' WHERE idPaciente = 1
+GO
+
