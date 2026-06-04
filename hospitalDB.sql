@@ -159,3 +159,10 @@ GO
 --41. Eliminar una tabla temporal
 DROP TABLE IF EXISTS tempdb.sys.tables
 GO
+
+--42. Eliminar una restricción CHECK
+ALTER TABLE Gestiones.Pacientes
+	DROP CONSTRAINT CK_tipo_sangre_val
+GO
+
+--
