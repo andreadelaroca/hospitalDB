@@ -311,7 +311,7 @@ INSERT INTO Gestiones.Citas (fecha, idPaciente, idMedico, estado, costo) VALUES
 	(DATEADD(day, 9, GETDATE()), 12, 2, 'Agendada', 50.00),
 	(DATEADD(day, 12, GETDATE()), 13, 3, 'Agendada', 65.50),
 	(DATEADD(day, 15, GETDATE()), 14, 4, 'Agendada', 40.00),
-	(DATEADD(day, 20, GETDATE()), 15, 5, 'Agendada', 55.00);
+	(DATEADD(day, 20, GETDATE()), 15, 5, 'Agendada', 55.00)
 GO
 
 --55, 62, 63. Insertar 10 habitaciones
@@ -377,3 +377,9 @@ GO
 --68. Actualizar salario de un médico.
 UPDATE Empleados.Medicos SET salario = 2222.5 WHERE idMedico = 1
 GO
+
+--69. Actualizar turno de un médico.
+UPDATE Empleados.Medicos SET turno = 'Diurno' WHERE idMedico = 1
+GO
+
+--70. 
