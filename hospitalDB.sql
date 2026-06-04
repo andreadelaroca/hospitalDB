@@ -334,3 +334,26 @@ INSERT INTO Hospital.Tratamientos (descripcion, estado, idPaciente) VALUES
 	('Tratamiento antiviral por hepatitis', 'Finalizado', 10)
 GO
 
+--57. Insertar 20 medicamentos
+INSERT INTO Hospital.Medicamentos (idTratamiento, nombre, estado, dosis) VALUES
+	(1, 'Enalapril 10mg', 'Vigente', 1.00),
+	(1, 'Amlodipino 5mg', 'Vigente', 0.50),
+	(2, 'Cisplatino 50mg', 'Vigente', 2.25),
+	(2, 'Ondansetrón 8mg', 'Vigente', 1.00),
+	(3, 'Ibuprofeno 600mg', 'Vigente', 3.00),
+	(3, 'Paracetamol 1g', 'Vigente', 4.00),
+	(4, 'Ceftriaxona 1g', 'Vigente', 2.00),
+	(4, 'Clindamicina 300mg', 'Vigente', 3.00),
+	(5, 'Metformina 850mg', 'Vigente', 2.00),
+	(5, 'Insulina Glargina', 'Vigente', 0.80),
+	(6, 'Aspirina 100mg', 'Vencido', 1.00),
+	(6, 'Atorvastatina 20mg', 'Vigente', 1.00),
+	(7, 'Betametasona Crema', 'Vigente', 1.50),
+	(7, 'Antihistamínico 10mg', 'Vencido', 1.00),
+	(8, 'Sumatriptán 50mg', 'Vigente', 0.50),
+	(8, 'Naproxeno 500mg', 'Vigente', 2.00),
+	(9, 'Tramadol drop 50mg', 'Vencido', 1.20),
+	(9, 'Diazepam 5mg', 'Vigente', 0.50),
+	(10, 'Ribavirina 200mg', 'Vigente', 3.50),
+	(10, 'Interferón Alfa', 'Vigente', 1.00)
+GO
