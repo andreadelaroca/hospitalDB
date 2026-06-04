@@ -292,7 +292,8 @@ INSERT INTO Gestiones.Pacientes (nombres, apellidos, correo, edad, telefono, dir
 	('Alberto', 'Lozano', 'alberto.loz@mail.com', 48, '5550117', 'Avenida Libertad 444', 1, 'O+', '1977-04-15'),
 	('Raquel', 'Blanco', 'raquel.blanco@mail.com', 23, '5550118', 'Calle del Pino 555', 0, 'AB+', '2003-05-07'),
 	('Enrique', 'Vidal', 'enrique.vidal@mail.com', 62, '5550119', 'Plaza Mayor 666', 1, 'A-', '1964-06-06'),
-	('Victoria', 'Prieto', 'victoria.prieto@mail.com', 19, '55566120', 'Paseo Marítimo 777', 0, 'O+', '2007-01-15')
+	('Victoria', 'Prieto', 'victoria.prieto@mail.com', 19, '55566120', 'Paseo Marítimo 777', 0, 'O+', '2007-01-15'),
+	('Paciente', 'Prueba', 'mevanaborrar@gmail.com', 1, '88888888', 'UAM', 0, 'AB+', '2007-01-16')
 GO
 
 --54, 60, 61. Insertar 15 citas
@@ -426,3 +427,6 @@ GO
 UPDATE Gestiones.Pacientes SET tipo_sangre = 'AB+' WHERE idPaciente = 1
 GO
 
+--81. Eliminar un paciente específico.
+DELETE FROM Gestiones.Pacientes WHERE idPaciente = 21
+GO
