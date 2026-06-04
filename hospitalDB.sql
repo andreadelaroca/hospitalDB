@@ -268,7 +268,7 @@ INSERT INTO Empleados.Medicos (nombres, apellidos, correo, edad, salario, idEspe
 	('Pedro', 'Ramírez', 'pedro.ramirez@hospital.com', 52, 980.00, 2, '22 años en pediatría integral', 'Matutino'),
 	('Elena', 'Torres', 'elena.torres@hospital.com', 39, 790.50, 3, '9 años en enfermedades neuromusculares', 'Diurno'),
 	('David', 'Flores', 'david.flores@hospital.com', 43, 650.00, 4, '11 años en cáncer de piel', 'Nocturno'),
-	('Laura', 'Castro', 'laura.castro@hospital.com', 46, 875.30, 5, '14 años en cirugía de reemplazo articular', 'Matutino');
+	('Laura', 'Castro', 'laura.castro@hospital.com', 46, 875.30, 5, '14 años en cirugía de reemplazo articular', 'Matutino')
 GO
 
 --53. Insertar 20 pacientes
@@ -292,5 +292,16 @@ INSERT INTO Gestiones.Pacientes (nombres, apellidos, correo, edad, telefono, dir
 	('Alberto', 'Lozano', 'alberto.loz@mail.com', 48, '555-0117', 'Avenida Libertad 444', 1, 'O+', GETDATE()),
 	('Raquel', 'Blanco', 'raquel.blanco@mail.com', 23, '555-0118', 'Calle del Pino 555', 0, 'AB+', GETDATE()),
 	('Enrique', 'Vidal', 'enrique.vidal@mail.com', 62, '555-0119', 'Plaza Mayor 666', 1, 'A-', GETDATE()),
-	('Victoria', 'Prieto', 'victoria.prieto@mail.com', 19, '555-0120', 'Paseo Marítimo 777', 0, 'O+', GETDATE());
+	('Victoria', 'Prieto', 'victoria.prieto@mail.com', 19, '555-0120', 'Paseo Marítimo 777', 0, 'O+', GETDATE())
+GO
+
+--54. Insertar 15 citas
+INSERT INTO Gestiones.Citas (fecha, idPaciente, idMedico, estado, costo) VALUES
+	(GETDATE(), 1, 1, 'Confirmada', 45.00),
+	(GETDATE(), 2, 2, 'En proceso', 50.00),
+	(GETDATE(), 3, 3, 'Completada', 65.50),
+	(GETDATE(), 4, 4, 'Confirmada', 40.00),
+	(GETDATE(), 5, 5, 'Agendada', 55.00),
+	(GETDATE(), 6, 6, 'Reprogramada', 45.00),
+	(GETDATE(), 7, 7, 'Confirmada', 50.00)
 GO
