@@ -382,4 +382,6 @@ GO
 UPDATE Empleados.Medicos SET turno = 'Diurno' WHERE idMedico = 1
 GO
 
---70. 
+--70. Cambiar estado de una cita
+UPDATE Gestiones.Citas SET estado = 'En proceso' WHERE idCita = 1
+GO
