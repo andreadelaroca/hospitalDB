@@ -22,32 +22,34 @@ USE HospitalDB
 GO
 
 --4.1 Creación de esquemas
-CREATE SCHEMA Pacientes
+CREATE SCHEMA Gestiones
 GO
 
-CREATE SCHEMA Medicos
+CREATE SCHEMA Empleados
 GO
 
 CREATE SCHEMA Hospital
 GO
 
 --4. Creación de tabla Pacientes
-CREATE TABLE Pacientes.Pacientes (
+CREATE TABLE Gestiones.Pacientes (
 	idPaciente INT IDENTITY(1,1) CONSTRAINT PK_idPaciente PRIMARY KEY --11. PK Pacientes
+	, nombre NVARCHAR(60) NOT NULL --13. nombre NOT NULL 
 )
 GO
 
 --5. Creación de tabla Medicos
-CREATE TABLE Medicos.Medicos
+CREATE TABLE Empleados.Medicos (
 	idMedico INT IDENTITY(1,1) CONSTRAINT PK_idMedico PRIMARY KEY --12. PK Medicos
+)
 GO
 
 --6. Creación de tabla Especialidades
-CREATE TABLE Medicos.Especialidades
+CREATE TABLE Empleados.Especialidades
 GO
 
 --7. Creación de tabla Citas
-CREATE TABLE Pacientes.Citas
+CREATE TABLE Gestiones.Citas
 GO
 
 --8. Creación de tabla Habitaciones
