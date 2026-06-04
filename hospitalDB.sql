@@ -491,3 +491,7 @@ GO
 SELECT * FROM Empleados.Medicos ORDER BY salario DESC
 GO
 
+--97. Mostrar citas del día actual
+SELECT * FROM Gestiones.Citas WHERE fecha = GETDATE()
+GO
+
