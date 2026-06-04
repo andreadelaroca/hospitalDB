@@ -246,3 +246,12 @@ GO
 
 USE HospitalDB
 GO
+
+--51. Insertar 5 especialidades médicas
+INSERT INTO Empleados.Especialidades (nombre) VALUES 
+	('Cardiología'),
+	('Pediatría'),
+	('Neurología'),
+	('Dermatología'),
+	('Traumatología')
+GO
