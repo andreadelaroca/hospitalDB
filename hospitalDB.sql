@@ -1,4 +1,3 @@
---MÓDULO 1: CREACIÓN DE LA BASE DE DATOS 
 USE master
 GO
 
@@ -86,7 +85,7 @@ GO
 CREATE TABLE Hospital.Habitaciones (
 	idHabitacion INT IDENTITY(1,1) CONSTRAINT PK_idHabitacion PRIMARY KEY
 	, codigo VARCHAR(20) NOT NULL
-	, idPaciente INT NULL CONSTRAINT FK_idPaciente FOREIGN KEY REFERENCES Gestiones.Pacientes(idPaciente)
+	, idPaciente INT NULL CONSTRAINT FK_idPaciente FOREIGN KEY REFERENCES Gestiones.Pacientes(idPaciente) --25.FOREIGN KEY entre Habitaciones y Pacientes
 )
 GO
 
@@ -112,7 +111,15 @@ CREATE TABLE Hospital.Medicamentos (
 )
 GO
 
+--26, 27, 28, 29, 30 Agregación de columnas a tabla Pacientes
+ALTER TABLE Gestiones.Pacientes
+	ADD telefono VARCHAR(60) NOT NULL
+	, direccion NVARCHAR(120) NOT NULL
+	, genero BIT NOT NULL
+	, tipo_sangre VARCHAR(4) CONSTRAINT CK_tipo_sangre_val CHECK(tipo_sangre IN ('%A%', '%B%', 'O%', '%+', '%-'))
+	, fechanac DATE CONSTRAINT CK_edad_val_med CHECK(fechanac >= GETDATE())
+GO
 
+--31, 32. Modificación de tabla Pacientes
 
-
---, fechanac DATE CONSTRAINT CK_edad_val_med CHECK(fechanac >= GETDATE()) --17. CHECK para edad mayor o igual a 0.
+--28, 30, 31, 32
