@@ -35,7 +35,7 @@ GO
 CREATE TABLE Gestiones.Pacientes (
 	idPaciente INT IDENTITY(1,1) CONSTRAINT PK_idPaciente PRIMARY KEY --11. PK Pacientes
 	, nombre NVARCHAR(60) NOT NULL --13. nombre NOT NULL 
-	, 
+	, correo NVARCHAR(100) CONSTRAINT UQ_correo UNIQUE --15. correo UNIQUE
 )
 GO
 
