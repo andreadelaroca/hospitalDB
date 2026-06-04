@@ -447,3 +447,8 @@ GO
 --85. Eliminar un tratamiento
 DELETE FROM Hospital.Tratamientos WHERE idTratamiento = 11
 GO
+
+--86. Eliminar citas canceladas
+DELETE FROM Gestiones.Citas WHERE estado = 'Cancelado'
+GO
+
