@@ -60,7 +60,7 @@ CREATE TABLE Empleados.Medicos (
 	, apellidos NVARCHAR(60) NOT NULL
 	, correo NVARCHAR(100) CONSTRAINT UQ_correo_med UNIQUE --16. correo UNIQUE
 	, edad INT CONSTRAINT CK_edad_val_med CHECK(edad > 0) --17. CHECK para edad mayor o igual a 0.
-	, salario DECIMAL(5,2) CONSTRAINT CK_salario_val CHECK(salario > 0) --18. CHECK salario mayor a 0.
+	, salario DECIMAL(8,2) CONSTRAINT CK_salario_val CHECK(salario > 0) --18. CHECK salario mayor a 0.
 	, idEspecialidad INT CONSTRAINT FK_idEspecialidad REFERENCES Empleados.Especialidades(idEspecialidad) --20. FOREIGN KEY entre Médicos y Especialidades.
 	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
 	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
@@ -149,7 +149,7 @@ GO
 
 --39. Modificar tipo el dato costo
 ALTER TABLE Gestiones.Citas
-	ALTER COLUMN costo DECIMAL(4,2) NOT NULL
+	ALTER COLUMN costo DECIMAL(6,2) NOT NULL
 GO
 
 --40. Agregar columna disponibilidad a Habitaciones
@@ -158,7 +158,8 @@ ALTER TABLE Hospital.Habitaciones
 GO
 
 --41. Eliminar una tabla temporal
-DROP TABLE IF EXISTS tempdb.sys.tables
+IF OBJECT_ID('tempdb..#TablaTemporal') IS NOT NULL
+    DROP TABLE #TablaTemporal
 GO
 
 --42. Eliminar una restricción CHECK
@@ -255,7 +256,6 @@ INSERT INTO Empleados.Especialidades (nombre) VALUES
 	('Dermatología'),
 	('Traumatología')
 GO
-
 
 --52, 59. Insertar 10 médicos
 INSERT INTO Empleados.Medicos (nombres, apellidos, correo, edad, salario, idEspecialidad, experiencia, turno) VALUES
@@ -365,7 +365,7 @@ INSERT INTO Hospital.Medicamentos (idTratamiento, nombre, estado, dosis) VALUES
 	(9, 'Tramadol drop 50mg', 'Vencido', 1.20),
 	(9, 'Diazepam 5mg', 'Vigente', 0.50),
 	(10, 'Ribavirina 200mg', 'Vigente', 3.50),
-	(10, 'Interferón Alfa', 'Vigente', 1.00)
+	(10, 'Interferón Alfa', 'Vigente', 1.00),
 	(11, 'Medicamento prueba', 'Vencido', 1.00)
 GO
 
@@ -378,7 +378,7 @@ UPDATE Gestiones.Pacientes SET direccion = 'Vistas de Esquipulas' WHERE idPacien
 GO
 
 --68. Actualizar salario de un médico.
-UPDATE Empleados.Medicos SET salario = 2222.5 WHERE idMedico = 1
+UPDATE Empleados.Medicos SET salario = 222.5 WHERE idMedico = 1
 GO
 
 --69. Actualizar turno de un médico.
@@ -446,6 +446,7 @@ DELETE FROM Hospital.Habitaciones WHERE idHabitacion = 10
 GO
 
 --85. Eliminar un tratamiento
+DELETE FROM Hospital.Medicamentos WHERE idTratamiento = 11
 DELETE FROM Hospital.Tratamientos WHERE idTratamiento = 11
 GO
 
@@ -454,7 +455,10 @@ DELETE FROM Gestiones.Citas WHERE estado = 'Cancelado'
 GO
 
 --87. Eliminar pacientes sin citas
-
+DELETE FROM Gestiones.Pacientes 
+WHERE idPaciente NOT IN 
+(SELECT DISTINCT idPaciente FROM Gestiones.Citas WHERE idPaciente IS NOT NULL)
+GO
 
 --88. Eliminar habitaciones vacías
 DELETE FROM Hospital.Habitaciones WHERE disponibilidad = 1
@@ -465,7 +469,9 @@ DELETE FROM Hospital.Medicamentos WHERE estado = 'Vencido'
 GO
 
 --90. Eliminar registros de prueba
-DELETE FROM sys.tables WHERE # LIKE '%prueba%'
+DELETE FROM Hospital.Medicamentos WHERE nombre LIKE '%prueba%'
+DELETE FROM Gestiones.Pacientes WHERE nombres LIKE '%Prueba%' OR apellidos LIKE '%Prueba%'
+GO
 
 --91. Mostrar todos los pacientes
 SELECT * FROM Gestiones.Pacientes
@@ -508,4 +514,5 @@ SELECT
 	COUNT(c.idCita) as Citas,
 	CONCAT(m.nombres, ' ', m.apellidos) as N'Médico'
 FROM Gestiones.Citas as c INNER JOIN Empleados.Medicos as m ON c.idMedico = m.idMedico
+GROUP BY CONCAT(m.nombres, ' ', m.apellidos)
 GO
