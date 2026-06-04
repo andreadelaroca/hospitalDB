@@ -86,13 +86,29 @@ GO
 CREATE TABLE Hospital.Habitaciones
 GO
 
---9. Creación de tabla Medicamentos
-CREATE TABLE Hospital.Medicamentos
+--9. Creación de tabla Tratamientos
+CREATE TABLE Hospital.Tratamientos (
+	idTratamiento INT IDENTITY(1,1) CONSTRAINT PK_idTratamiento PRIMARY KEY
+	, descripcion NVARCHAR(60) NOT NULL
+	, estado VARCHAR(20) CONSTRAINT CK_estado_val CHECK(estado IN ('Activo', 'En proceso', 'Finalizado'))
+	, idPaciente INT FOREIGN KEY REFERENCES Gestiones.Pacientes(idPaciente) --23. FOREIGN KEY entre Tratamientos y Pacientes
+	, fechaRegistro DATETIME NOT NULL DEFAULT GETDATE() --19. Agregar DEFAULT para fecha de registro.
+	, fechaActualizado DATETIME NULL DEFAULT GETDATE()
+	, fechaEliminado DATETIME NULL
+)
 GO
 
---10. Creación de tabla Tratamientos
-CREATE TABLE Hospital.Tratamientos
+--10. Creación de tabla Medicamentos
+CREATE TABLE Hospital.Medicamentos (
+	idMedicamento INT IDENTITY(1,1) CONSTRAINT PK_idMedicamento PRIMARY KEY
+	, idTratamiento INT CONSTRAINT FK_idTratamiento FOREIGN KEY REFERENCES Hospital.Tratamientos(idTratamiento) -- 24. FOREIGN KEY entre Medicamentos y Tratamientos.
+	, nombre NVARCHAR(50) NOT NULL
+	, estado VARCHAR(20) CONSTRAINT CK_estado_val CHECK(estado IN ('Vigente', 'Vencido'))
+	, dosis DECIMAL (4,2) NOT NULL CONSTRAINT CK_dosis_val CHECK(dosis > 0)
+)
 GO
+
+
 
 
 --, fechanac DATE CONSTRAINT CK_edad_val_med CHECK(fechanac >= GETDATE()) --17. CHECK para edad mayor o igual a 0.
