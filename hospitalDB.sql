@@ -366,6 +366,7 @@ INSERT INTO Hospital.Medicamentos (idTratamiento, nombre, estado, dosis) VALUES
 	(9, 'Diazepam 5mg', 'Vigente', 0.50),
 	(10, 'Ribavirina 200mg', 'Vigente', 3.50),
 	(10, 'Interferón Alfa', 'Vigente', 1.00)
+	(11, 'Medicamento prueba', 'Vencido', 1.00)
 GO
 
 --66. Actualizar teléfono de un paciente
@@ -457,4 +458,23 @@ GO
 
 --88. Eliminar habitaciones vacías
 DELETE FROM Hospital.Habitaciones WHERE disponibilidad = 1
+GO
+
+--89. Eliminar medicamentos vencidos
+DELETE FROM Hospital.Medicamentos WHERE estado = 'Vencido'
+GO
+
+--90. Eliminar registros de prueba
+DELETE FROM sys.tables WHERE # LIKE '%prueba%'
+
+--91. Mostrar todos los pacientes
+SELECT * FROM Gestiones.Pacientes
+GO
+
+--92. Mostrar todos los médicos
+SELECT * FROM Empleados.Medicos
+GO
+
+--93. Mostrar todas las especialidades
+SELECT * FROM Empleados.Especialidades
 GO
