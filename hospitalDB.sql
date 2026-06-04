@@ -495,3 +495,7 @@ GO
 SELECT * FROM Gestiones.Citas WHERE fecha = GETDATE()
 GO
 
+--98. Mostrar habitaciones disponibles
+SELECT * FROM Hospital.Habitaciones WHERE estado = 0
+GO
+
