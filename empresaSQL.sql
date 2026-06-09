@@ -98,11 +98,11 @@ ALTER TABLE Personal.TEmpleado
 	ADD CONSTRAINT CK_empedadval CHECK(nEdad BETWEEN 18 AND 65)
 	, CONSTRAINT UQ_empemail UNIQUE(cEmail)
 	, CONSTRAINT CK_empgenero CHECK(cGenero IN ('M', 'F'))
-	, CONSTRAINT CK_empfechanac CHECK(dFechaNacimiento > GETDATE())
+	, CONSTRAINT CK_empfechanac CHECK(dFechaNacimiento < GETDATE())
 GO
 
 ALTER TABLE Personal.TEmpleado
-	DROP cDireccion
+	DROP COLUMN cDireccion
 GO
 
 ALTER TABLE Personal.TEmpleado
@@ -132,19 +132,21 @@ INSERT INTO Personal.TEmpleado(cNIF, cNombre, cApellido, nDepartamentoID, nCargo
 	('12345678A', 'Andrea', 'de la Roca', 1, 1, 100000, 'asodelaroca@uamv.edu.ni', '11111111', 19, 'F', '2007-01-15')
 	, ('22345678B', 'Johnny', 'Calero', 2, 2, 301, 'jacq@uamv.edu.ni', '22222222', 19, 'M', '2006-11-16')
 	, ('32345678C', 'Noa', 'Reyes', 4, 3, 100000, 'naam@gmail.com', '33333333', 19, 'F', '2007-03-20')
-	, ('42345678D', 'Bandrea', 'be la Roca', 4, 3, 20000, 'si@uamv.edu.ni', '44444444', 80, 'F', '2006-01-16')
+	, ('42345678D', 'Bandrea', 'be la Roca', 4, 3, 20000, 'si@uamv.edu.ni', '44444444', 60, 'F', '2006-01-16')
 	, ('52345678E', 'Candrea', 'ce la Roca', 4, 5, 40000, 'no@gmail.com', '55555555', 36, 'F', '2000-08-27')
 	, ('62345678F', 'Dandrea', 'e la Roca', 5, 5, 350000, 'talvez@gmail.com', '66666666', 27, 'M', '1999-12-30')
 	, ('72345678E', 'Endrea', 'la Roca', 1, 2, 100000, '67@mgial.com', '77777777', 20, 'F', '1987-06-07')
 	, ('82345678G', 'Fandrea', 'fe la Roca', 3, 3, 302, 'aaaa@gmail.ni', '88888888', 35, 'M', '1999-02-13')
 	, ('92345678H', 'Handrea', 'he la Roca', 5, 4, 7000, 'gmail@uamv.edu.ni', '99999999', 25, 'M', '2003-05-05')
 	, ('02345678J', 'Jandrea', 'je la Roca', 2, 2, 3000, 'uam@uamv.edu.ni', '00000000', 64, 'F', '2000-04-04')
+	, ('00000000X', 'Prueba', 'Prueba', 5, 5, 3000, 'prueba@uamv.edu.ni', '00000001', 20, 'M', '2001-01-01')
 GO
 
 INSERT INTO Empresa.TProyecto(cNombre, dFechaInicio) VALUES
 	('Proyecto 67', '2000-05-05')
 	, ('Proyecto Bubulabubu chocorron', '2002-06-06')
 	, ('Proyecto César', '2003-07-07')
+	, ('Proyecto Prueba', '2001-02-02')
 GO
 
 INSERT INTO Empresa.TEmpleadoProyecto(nProyectoID, nEmpleadoID) VALUES
@@ -175,5 +177,21 @@ GO
 UPDATE Empresa.TProyecto SET dFechaFinalizacion = '2030-01-01' WHERE nProyectoID = 1
 GO
 
-INSERT INTO Empresa.TEmpleadoProyecto(nEmpleadoID, nProyectoID) VALUES (1, 5)
+INSERT INTO Empresa.TEmpleadoProyecto(nProyectoID, nEmpleadoID) VALUES (1, 5)
+GO
+
+--Parte V. Eliminación de Datos (DELETE)
+DELETE FROM Personal.TEmpleado WHERE cNIF = '00000000X'
+GO
+
+DELETE FROM Personal.TEmpleado WHERE bActivo = 0
+GO
+
+DELETE FROM Empresa.TProyecto WHERE cNombre LIKE '%Prueba%'
+GO
+
+DELETE FROM Empresa.TEmpleadoProyecto WHERE nEmpleadoID = 5
+GO
+
+DELETE FROM Empresa.TDepartamento WHERE nDepartamentoID NOT IN (SELECT DISTINCT nDepartamentoID FROM Personal.TEmpleado WHERE nEmpleadoID IS NOT NULL)
 GO
