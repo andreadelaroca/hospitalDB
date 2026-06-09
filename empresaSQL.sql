@@ -146,3 +146,34 @@ INSERT INTO Empresa.TProyecto(cNombre, dFechaInicio) VALUES
 	, ('Proyecto Bubulabubu chocorron', '2002-06-06')
 	, ('Proyecto César', '2003-07-07')
 GO
+
+INSERT INTO Empresa.TEmpleadoProyecto(nProyectoID, nEmpleadoID) VALUES
+	(1, 1), (1, 2), (1, 3)
+	, (2, 4), (2, 5), (2, 6)
+	, (3, 7), (3, 8), (3, 9), (3, 10)
+GO
+
+--Parte IV. Actualización de Datos (UPDATE)
+UPDATE Personal.TEmpleado SET nSalario = nSalario + (nSalario * 0.1)
+GO
+
+UPDATE Personal.TEmpleado SET nSalario = nSalario + (nSalario * 0.2) WHERE nDepartamentoID = 1
+GO
+
+UPDATE Personal.TEmpleado SET cEmail = 'pepetilin@gmail.com' WHERE nEmpleadoID = 1
+GO
+
+UPDATE Personal.TEmpleado SET nCargoID = 1 WHERE nEmpleadoID = 3
+GO
+
+UPDATE Personal.TEmpleado SET nDepartamentoID = 2 WHERE nEmpleadoID IN (3, 4)
+GO
+
+UPDATE Personal.TEmpleado SET bActivo = 0 WHERE nSalario < 500
+GO
+
+UPDATE Empresa.TProyecto SET dFechaFinalizacion = '2030-01-01' WHERE nProyectoID = 1
+GO
+
+INSERT INTO Empresa.TEmpleadoProyecto(nEmpleadoID, nProyectoID) VALUES (1, 5)
+GO
