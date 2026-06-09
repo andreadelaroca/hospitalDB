@@ -130,13 +130,13 @@ GO
 
 INSERT INTO Personal.TEmpleado(cNIF, cNombre, cApellido, nDepartamentoID, nCargoID, nSalario, cEmail, cTelefono, nEdad, cGenero, dFechaNacimiento) VALUES 
 	('12345678A', 'Andrea', 'de la Roca', 1, 1, 100000, 'asodelaroca@uamv.edu.ni', '11111111', 19, 'F', '2007-01-15')
-	, ('22345678B', 'Johnny', 'Calero', 2, 2, 300.01, 'jacq@uamv.edu.ni', '22222222', 19, 'M', '2006-11-16')
+	, ('22345678B', 'Johnny', 'Calero', 2, 2, 500.01, 'jacq@uamv.edu.ni', '22222222', 19, 'M', '2006-11-16')
 	, ('32345678C', 'Noa', 'Reyes', 4, 3, 100000, 'naam@gmail.com', '33333333', 19, 'F', '2007-03-20')
 	, ('42345678D', 'Bandrea', 'be la Roca', 4, 3, 20000, 'si@uamv.edu.ni', '44444444', 60, 'F', '2006-01-16')
 	, ('52345678E', 'Candrea', 'ce la Roca', 4, 5, 40000, 'no@gmail.com', '55555555', 36, 'F', '2000-08-27')
 	, ('62345678F', 'Dandrea', 'e la Roca', 5, 5, 350000, 'talvez@gmail.com', '66666666', 27, 'M', '1999-12-30')
 	, ('72345678E', 'Endrea', 'la Roca', 1, 2, 100000, '67@mgial.com', '77777777', 20, 'F', '1987-06-07')
-	, ('82345678G', 'Fandrea', 'fe la Roca', 3, 3, 302, 'aaaa@gmail.ni', '88888888', 35, 'M', '1999-02-13')
+	, ('82345678G', 'Fandrea', 'fe la Roca', 3, 3, 501, 'aaaa@gmail.ni', '88888888', 35, 'M', '1999-02-13')
 	, ('92345678H', 'Handrea', 'he la Roca', 5, 4, 7000, 'gmail@uamv.edu.ni', '99999999', 25, 'M', '2003-05-05')
 	, ('02345678J', 'Jandrea', 'je la Roca', 2, 2, 3000, 'uam@uamv.edu.ni', '00000000', 64, 'F', '2000-04-04')
 	, ('00000000X', 'Prueba', 'Prueba', 5, 5, 3000, 'prueba@uamv.edu.ni', '00000001', 20, 'M', '2001-01-01')
@@ -297,4 +297,28 @@ GO
 ALTER TABLE Personal.TEmpleado
 	ADD CONSTRAINT CK_empedadval CHECK(nEdad BETWEEN 18 AND 65)
 	, CONSTRAINT UQ_empemail UNIQUE(cEmail)
+GO
+
+DROP TABLE Empresa.TEmpleadoProyecto
+GO
+
+DROP TABLE Empresa.TProyecto
+GO
+
+DROP TABLE Personal.TEmpleado
+GO
+
+DROP TABLE Personal.TCargo
+GO
+
+DROP TABLE Empresa.TDepartamento
+GO
+
+DROP TABLE Empresa.TSucursal
+GO
+
+USE master
+GO
+
+DROP DATABASE EmpresaSQL
 GO
