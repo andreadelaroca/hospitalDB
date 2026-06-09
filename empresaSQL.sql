@@ -130,7 +130,7 @@ GO
 
 INSERT INTO Personal.TEmpleado(cNIF, cNombre, cApellido, nDepartamentoID, nCargoID, nSalario, cEmail, cTelefono, nEdad, cGenero, dFechaNacimiento) VALUES 
 	('12345678A', 'Andrea', 'de la Roca', 1, 1, 100000, 'asodelaroca@uamv.edu.ni', '11111111', 19, 'F', '2007-01-15')
-	, ('22345678B', 'Johnny', 'Calero', 2, 2, 301, 'jacq@uamv.edu.ni', '22222222', 19, 'M', '2006-11-16')
+	, ('22345678B', 'Johnny', 'Calero', 2, 2, 300.01, 'jacq@uamv.edu.ni', '22222222', 19, 'M', '2006-11-16')
 	, ('32345678C', 'Noa', 'Reyes', 4, 3, 100000, 'naam@gmail.com', '33333333', 19, 'F', '2007-03-20')
 	, ('42345678D', 'Bandrea', 'be la Roca', 4, 3, 20000, 'si@uamv.edu.ni', '44444444', 60, 'F', '2006-01-16')
 	, ('52345678E', 'Candrea', 'ce la Roca', 4, 5, 40000, 'no@gmail.com', '55555555', 36, 'F', '2000-08-27')
@@ -194,4 +194,107 @@ DELETE FROM Empresa.TEmpleadoProyecto WHERE nEmpleadoID = 5
 GO
 
 DELETE FROM Empresa.TDepartamento WHERE nDepartamentoID NOT IN (SELECT DISTINCT nDepartamentoID FROM Personal.TEmpleado WHERE nEmpleadoID IS NOT NULL)
+GO
+
+--Parte VI. Consultas de Verificación
+SELECT * FROM Personal.TEmpleado ORDER BY cApellido ASC
+GO
+
+SELECT * FROM Personal.TEmpleado WHERE nSalario > 1000
+GO
+
+SELECT * FROM Personal.TEmpleado WHERE bActivo = 1
+GO
+
+SELECT 
+	CONCAT(e.cNombre, ' ', e.cApellido) as Empleado,
+	d.cNombreDepartamento as Departamento
+FROM Empresa.TDepartamento AS d INNER JOIN Personal.TEmpleado AS e ON d.nDepartamentoID = e.nDepartamentoID
+GO
+
+SELECT 
+	CONCAT(e.cNombre, ' ', e.cApellido) AS Empleado,
+	c.cNombreCargo AS Cargo
+FROM Personal.TCargo AS c INNER JOIN Personal.TEmpleado AS e ON c.nCargoID = e.nCargoID
+GO
+
+SELECT
+	CONCAT(e.cNombre, ' ', e.cApellido) AS Empleado,
+	p.cNombre AS Proyecto
+FROM Personal.TEmpleado AS e INNER JOIN Empresa.TEmpleadoProyecto AS ep ON e.nEmpleadoID = ep.nEmpleadoID
+							INNER JOIN Empresa.TProyecto AS p ON ep.nProyectoID = p.nProyectoID
+GO
+
+SELECT
+	d.cNombreDepartamento AS Departamento,
+	COUNT(e.nEmpleadoID) AS Empleados
+FROM Personal.TEmpleado AS e INNER JOIN Empresa.TDepartamento AS d ON e.nDepartamentoID = d.nDepartamentoID
+GROUP BY d.cNombreDepartamento
+GO
+
+SELECT
+	d.cNombreDepartamento AS Departamento,
+	AVG(e.nSalario) AS N'Salario promedio'
+FROM Personal.TEmpleado AS e INNER JOIN Empresa.TDepartamento AS d ON e.nDepartamentoID = d.nDepartamentoID
+GROUP BY d.cNombreDepartamento
+GO
+
+SELECT
+	d.cNombreDepartamento AS Departamento,
+	MIN(e.nSalario) AS N'Salario mínimo',
+	MAX(e.nSalario) AS N'Salario máximo'
+FROM Personal.TEmpleado AS e INNER JOIN Empresa.TDepartamento AS d ON e.nDepartamentoID = d.nDepartamentoID
+GROUP BY d.cNombreDepartamento
+GO
+
+SELECT
+	p.cNombre AS Proyecto,
+	COUNT(ep.nEmpleadoID) as Empleados
+FROM Empresa.TEmpleadoProyecto AS ep INNER JOIN Empresa.TProyecto AS p ON ep.nProyectoID = p.nProyectoID
+GROUP BY p.cNombre
+HAVING COUNT(ep.nEmpleadoID) > 2
+GO
+
+SELECT CONCAT(cNombre, ' ', cApellido) AS Empleado
+FROM Personal.TEmpleado
+WHERE cApellido LIKE 'G%'
+GO
+
+SELECT 
+	CONCAT(cNombre, ' ', cApellido) AS Empleado,
+	nSalario AS Salario
+FROM Personal.TEmpleado
+ORDER BY nSalario DESC
+GO
+
+SELECT TOP 3
+	nSalario AS Salario
+FROM Personal.TEmpleado
+ORDER BY nSalario DESC
+GO
+
+SELECT 
+	CONCAT(cNombre, ' ', cApellido) AS Empleado,
+	nEdad AS Edad
+FROM Personal.TEmpleado
+WHERE nEdad BETWEEN 25 AND 40
+GO
+
+SELECT COUNT(nEmpleadoID) AS N'Empleados activos'
+FROM Personal.TEmpleado
+WHERE bActivo = 1
+GO
+
+SELECT COUNT(nProyectoID) AS Proyectos FROM Empresa.TProyecto
+GO
+
+--Parte VII. Administración de Objetos
+ALTER TABLE Personal.TEmpleado
+	DROP CONSTRAINT CK_empedadval
+	, CONSTRAINT UQ_empemail
+GO
+
+ALTER TABLE Personal.TEmpleado
+	ADD CONSTRAINT CK_empedadval CHECK(nEdad BETWEEN 18 AND 65)
+	, CONSTRAINT UQ_empemail UNIQUE(cEmail)
 GO
