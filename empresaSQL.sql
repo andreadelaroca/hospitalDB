@@ -26,3 +26,9 @@ CREATE TABLE Empresa.TDepartamento (
 	, cNombreDepartamento NVARCHAR(60) NOT NULL CONSTRAINT UQ_depnombre UNIQUE
 )
 GO
+
+CREATE TABLE Personal.TCargo (
+	nCargoID INT IDENTITY(1,1) CONSTRAINT PK_cargoid PRIMARY KEY
+	, cNombreCargo NVARCHAR(60) NOT NULL CONSTRAINT UQ_cargonombre UNIQUE
+)
+GO
