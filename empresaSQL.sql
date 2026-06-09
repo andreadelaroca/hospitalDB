@@ -322,3 +322,158 @@ GO
 
 DROP DATABASE EmpresaSQL
 GO
+
+--Desafíos adicionales
+USE master
+GO
+
+IF EXISTS(SELECT * FROM sys.databases WHERE NAME = 'EmpresaSQL')
+	BEGIN
+		ALTER DATABASE EmpresaSQL SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+		DROP DATABASE EmpresaSQL
+	END
+GO
+
+CREATE DATABASE EmpresaSQL
+GO
+
+USE EmpresaSQL
+GO
+
+CREATE TABLE TCliente (
+	idCliente INT IDENTITY(1,1) CONSTRAINT PK_idcliente PRIMARY KEY
+	, nombres NVARCHAR(60) NOT NULL
+	, apellidos NVARCHAR(60) NOT NULL
+	, organizacion NVARCHAR(100) NOT NULL
+	, correo NVARCHAR(120) 
+	CONSTRAINT UQ_correo UNIQUE
+	CONSTRAINT CK_correo CHECK(correo LIKE  '%_@__%.__%')
+	, telefono NVARCHAR(20) CONSTRAINT CK_telefono CHECK(LEN(telefono) >= 8)
+	, direccion NVARCHAR(120) NOT NULL
+	, sexo CHAR CONSTRAINT CK_sexo CHECK(sexo IN ('M', 'F'))
+)
+GO
+
+CREATE TABLE TProducto (
+	idProducto INT IDENTITY(1,1) CONSTRAINT PK_idprod PRIMARY KEY
+	, nombre NVARCHAR(60) NOT NULL
+	, precioUnitario DECIMAL(4,2) CONSTRAINT CK_precioval CHECK(precioUnitario > 0)
+)
+GO
+
+CREATE TABLE TVenta (
+	idVenta INT IDENTITY(1,1) CONSTRAINT PK_idventa PRIMARY KEY
+	, idCliente INT CONSTRAINT FK_idcliente FOREIGN KEY REFERENCES TCliente(idCliente)
+	, idProducto INT CONSTRAINT FK_idproducto FOREIGN KEY REFERENCES TProducto(idProducto)
+	, fechaVenta DATE NOT NULL
+	, precio DECIMAL(4,2) 
+)
+GO
+
+INSERT INTO TCliente (nombres, apellidos, organizacion, correo, telefono, direccion, sexo) VALUES
+('Juan', 'Pérez', 'Tech Solutions', 'juan.perez@tech.com', '12345678', 'Calle Alta 123', 'M'),
+('María', 'Gómez', 'Innovate LLC', 'maria.gomez@innovate.com', '87654321', 'Av. Central 456', 'F'),
+('Carlos', 'López', 'DevCorp', 'carlos.lopez@devcorp.net', '99887766', 'Jr. Los Pinos 789', 'M'),
+('Ana', 'Martínez', 'Global Trade', 'ana.martinez@global.com', '55443322', 'Av. Larco 101', 'F'),
+('Luis', 'Rodríguez', 'Luis Inc', 'luis.rod@gmail.com', '11223344', 'Calle Lima 202', 'M'),
+('Elena', 'Zapata', 'SoftNet', 'elena.z@softnet.org', '77665544', 'Av. Primavera 303', 'F'),
+('Pedro', 'Castro', 'Inversiones PC', 'pedro.c@inversiones.com', '44556677', 'Calle Real 404', 'M'),
+('Sonia', 'Alva', 'Alva Tech', 'sonia.alva@alvatech.com', '22334455', 'Av. Grau 505', 'F'),
+('Jorge', 'Peña', 'Constructora JP', 'jorge.p@constructora.com', '66778899', 'Jr. Trujillo 606', 'M'),
+('Lucía', 'Díaz', 'Estudio LD', 'lucia.diaz@estudio.com', '88990011', 'Av. Brasil 707', 'F'),
+('Roberto', 'Sánchez', 'Sánchez & Asoc', 'roberto.s@sanchez.com', '33445566', 'Calle Ica 808', 'M'),
+('Marta', 'Flores', 'Flores SAC', 'marta.f@flores.com', '55667788', 'Av. Tacna 909', 'F'),
+('Andrés', 'Mendoza', 'ExportMendoza', 'andres.m@export.com', '22113344', 'Jr. Puno 111', 'M'),
+('Silvia', 'Ramos', 'Ramos EIRL', 'silvia.ramos@ramos.com', '99001122', 'Av. Ejercito 222', 'F'),
+('Manuel', 'Espinoza', 'Logística ME', 'manuel.e@logistica.com', '44332211', 'Calle Cusco 333', 'M'),
+('Patricia', 'Chávez', 'Chávez Corp', 'patricia.ch@corp.com', '66554433', 'Av. Arenales 444', 'F'),
+('Fernando', 'Ruiz', 'Ruiz Sistemas', 'fernando.r@sistemas.com', '88776655', 'Jr. Junín 555', 'M'),
+('Laura', 'Torres', 'Torres Consulting', 'laura.t@consulting.com', '11447788', 'Av. Arequipa 666', 'F'),
+('Ricardo', 'Vargas', 'Vargas & Co', 'ricardo.v@vargas.com', '22558899', 'Calle Loreto 777', 'M'),
+('Carmen', 'Rojas', 'Rojas Creativos', 'carmen.r@creativos.com', '33669900', 'Av. Angamos 888', 'F')
+GO
+
+INSERT INTO TProducto (nombre, precioUnitario) VALUES 
+('Mouse Óptico', 15.50),
+('Teclado Mecánico', 45.00),
+('Monitor 24 pulgadas', 99.99),
+('Audífonos Gamer', 35.00),
+('Pad Mouse', 12.00)
+GO
+
+--bucle para inserción de 50 ventas
+DECLARE @contador INT = 1
+DECLARE @idCli INT
+DECLARE @idProd INT
+DECLARE @precioProd DECIMAL(4,2)
+DECLARE @fecha DATE
+
+WHILE @contador <= 50
+BEGIN
+    SET @idCli = (@contador % 20) + 1;
+    SET @idProd = (@contador % 5) + 1;
+    SELECT @precioProd = precioUnitario FROM TProducto WHERE idProducto = @idProd   -- Generar una fecha variada (entre 2025 y 2026)
+    SET @fecha = DATEADD(DAY, -(@contador * 5), GETDATE())
+    INSERT INTO TVenta (idCliente, idProducto, fechaVenta, precio)
+    VALUES (@idCli, @idProd, @fecha, @precioProd);
+    SET @contador = @contador + 1;
+END
+GO
+
+UPDATE TVenta
+SET precio = precio * 0.90
+WHERE fechaVenta < '2026-01-01'
+GO
+
+DELETE FROM TCliente
+WHERE idCliente NOT IN (
+    SELECT DISTINCT idCliente 
+    FROM TVenta 
+    WHERE idCliente IS NOT NULL
+)
+GO
+
+SELECT TOP 5 
+    c.idCliente,
+    c.nombres + ' ' + c.apellidos AS Cliente,
+    SUM(v.precio) AS Total
+FROM TVenta v
+INNER JOIN TCliente c ON v.idCliente = c.idCliente
+GROUP BY c.idCliente, c.nombres, c.apellidos, c.organizacion
+ORDER BY Total DESC
+GO
+
+SELECT 
+    YEAR(fechaVenta) AS N'Año',
+    MONTH(fechaVenta) AS Mes,
+    COUNT(idVenta) AS Ventas,
+    SUM(precio) AS TotalVentas
+FROM TVenta
+GROUP BY YEAR(fechaVenta), MONTH(fechaVenta)
+ORDER BY N'Año' DESC, Mes DESC
+GO
+
+SELECT 
+    c.idCliente,
+    c.nombres + ' ' + c.apellidos AS Cliente,
+    AVG(v.precio) AS Promedio,
+    COUNT(v.idVenta) AS Total
+FROM TCliente c
+INNER JOIN TVenta v ON c.idCliente = v.idCliente
+GROUP BY c.idCliente, c.nombres, c.apellidos
+ORDER BY Promedio DESC
+GO
+
+SELECT 
+    v.idVenta as Venta,
+    v.fechaVenta AS Fecha,
+    c.nombres + ' ' + c.apellidos AS Cliente,
+    c.organizacion AS Empresa,
+    p.nombre AS Productos,
+    p.precioUnitario AS Precio,
+    v.precio AS 'Total pagado'
+FROM TVenta v
+INNER JOIN TCliente c ON v.idCliente = c.idCliente
+INNER JOIN TProducto p ON v.idProducto = p.idProducto
+ORDER BY v.fechaVenta DESC;
+GO
