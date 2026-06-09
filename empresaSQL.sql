@@ -1,0 +1,16 @@
+--Parte I. Creación de Base de Datos y Tablas (DDL)
+USE master
+GO
+
+IF EXISTS(SELECT * FROM sys.databases WHERE NAME = 'EmpresaSQL')
+	BEGIN
+		ALTER DATABASE EmpresaSQL SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+		DROP DATABASE EmpresaSQL
+	END
+GO
+
+CREATE DATABASE EmpresaSQL
+GO
+
+USE EmpresaSQL
+GO
