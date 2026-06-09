@@ -52,3 +52,10 @@ CREATE TABLE Empresa.TProyecto (
 	, dFechaFinalizacion DATE
 )
 GO
+
+CREATE TABLE Empresa.TEmpleadoProyecto (
+	nProyectoID INT CONSTRAINT FK_proyid FOREIGN KEY REFERENCES Empresa.TProyecto(nProyectoID)
+	, nEmpleadoID INT CONSTRAINT FK_empid FOREIGN KEY REFERENCES Personal.TEmpleado(nEmpleadoID)
+	PRIMARY KEY (nProyectoID, nEmpleadoID)
+)
+GO
