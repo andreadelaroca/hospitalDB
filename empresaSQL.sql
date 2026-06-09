@@ -32,3 +32,13 @@ CREATE TABLE Personal.TCargo (
 	, cNombreCargo NVARCHAR(60) NOT NULL CONSTRAINT UQ_cargonombre UNIQUE
 )
 GO
+
+CREATE TABLE Personal.TEmpleado (
+	nEmpleadoID INT IDENTITY(1,1) CONSTRAINT PK_emplid PRIMARY KEY
+	, cNIF NVARCHAR(30) UNIQUE
+	, cNombre NVARCHAR(60) NOT NULL
+	, cApellido NVARCHAR(60) NOT NULL
+	, nDepartamentoID INT CONSTRAINT FK_depid FOREIGN KEY REFERENCES Empresa.TDepartamento(nDepartamentoID)
+	, nCargoID INT CONSTRAINT FK_cargoid REFERENCES Personal.TCargo(nCargoID)
+)
+GO
