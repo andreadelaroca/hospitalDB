@@ -40,5 +40,15 @@ CREATE TABLE Personal.TEmpleado (
 	, cApellido NVARCHAR(60) NOT NULL
 	, nDepartamentoID INT CONSTRAINT FK_depid FOREIGN KEY REFERENCES Empresa.TDepartamento(nDepartamentoID)
 	, nCargoID INT CONSTRAINT FK_cargoid REFERENCES Personal.TCargo(nCargoID)
+	, dFechaContratacion DATE NOT NULL CONSTRAINT DF_fechacontrat DEFAULT GETDATE()
+	, nSalario DECIMAL(6, 2) CONSTRAINT CK_salario CHECK(nSalario > 300)
+)
+GO
+
+CREATE TABLE Empresa.TProyecto (
+	nProyectoID INT IDENTITY(1,1) CONSTRAINT PK_proyid PRIMARY KEY
+	, cNombre NVARCHAR(80) NOT NULL
+	, dFechaInicio DATE NOT NULL
+	, dFechaFinalizacion DATE
 )
 GO
