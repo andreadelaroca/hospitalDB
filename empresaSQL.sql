@@ -14,3 +14,10 @@ GO
 
 USE EmpresaSQL
 GO
+
+CREATE SCHEMA Empresa
+GO
+
+CREATE SCHEMA Personal
+GO
+
