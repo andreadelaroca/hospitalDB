@@ -59,3 +59,25 @@ CREATE TABLE Empresa.TEmpleadoProyecto (
 	PRIMARY KEY (nProyectoID, nEmpleadoID)
 )
 GO
+
+--Parte II. Modificación de Estructuras (ALTER)
+ALTER TABLE Personal.TEmpleado
+	ADD cEmail NVARCHAR(120) CONSTRAINT CK_empemail CHECK(cEmail LIKE '%.%@%')
+	, cTelefono NVARCHAR(60)
+	, cDireccion NVARCHAR(120)
+	, nEdad INT
+	, bActivo BIT DEFAULT 1
+GO
+
+ALTER TABLE Personal.TEmpleado
+	ALTER COLUMN cNombre NVARCHAR(100)
+GO
+
+ALTER TABLE Personal.TEmpleado
+	ALTER COLUMN cApellido NVARCHAR(100)
+GO
+
+ALTER TABLE Personal.TEmpleado
+	ADD CONSTRAINT CK_empedadval CHECK(nEdad BETWEEN 18 AND 65)
+	, CONSTRAINT UQ_empemail UNIQUE(cEmail)
+GO
