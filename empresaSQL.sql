@@ -21,3 +21,8 @@ GO
 CREATE SCHEMA Personal
 GO
 
+CREATE TABLE Empresa.TDepartamento (
+	nDepartamentoID INT IDENTITY(1,1) CONSTRAINT PK_depid PRIMARY KEY
+	, cNombreDepartamento NVARCHAR(60) NOT NULL CONSTRAINT UQ_depnombre UNIQUE
+)
+GO
