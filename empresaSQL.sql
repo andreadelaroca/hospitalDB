@@ -110,5 +110,7 @@ ALTER TABLE Personal.TEmpleado
 GO
 
 CREATE TABLE Empresa.TSucursal (
+	nSucursalID INT IDENTITY(1,1) CONSTRAINT PK_sucid PRIMARY KEY
+	, cDireccion NVARCHAR(120)
 )
 GO
